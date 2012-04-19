@@ -1,5 +1,12 @@
 import nextcord
 from nextcord.ext import commands
+from configparser import ConfigParser
+
+config=ConfigParser()
+config.read(".\config.ini")
+guild_id_1=config["options"]["guild1_id"]
+guild_id_2=config["options"]["guild2_id"]
+guilds=[int(guild_id_1),int(guild_id_2)]
 
 
 class GetID(commands.Cog):
@@ -7,20 +14,14 @@ class GetID(commands.Cog):
         self.client = client
 
     # Get ID Command Self Explanatory
-    @commands.command(pass_context=True)
-    async def getid(self, ctx, member: nextcord.Member):
+    @nextcord.slash_command(guild_ids=guilds, description="Get The Id Of A Specific Member")
+    async def getid(self, interaction: nextcord.Interaction, member: nextcord.Member):
         IdEmbed = nextcord.Embed(
             title=f"{member._user}'s Id",
             color=0x2852fa,
             description=f"The Id Of {member._user} is {member.id}")
         IdEmbed.set_thumbnail(member.avatar.url)
-        await ctx.send(embed=IdEmbed)
-
-    @getid.error
-    async def getid_error(self, ctx, error):
-        if isinstance(error, commands.MissingRequiredArgument):
-            await ctx.send(f"<@{ctx.author.id}> \nThis Command Usage Is ` -GetId [Member] `")
-
+        await interaction.response.send_message(embed=IdEmbed)
 
 # Setup
 def setup(client):

@@ -1,26 +1,26 @@
 import nextcord
 from nextcord.ext import commands
+from configparser import ConfigParser
 
+config=ConfigParser()
+config.read(".\config.ini")
+guild_id_1=config["options"]["guild1_id"]
+guild_id_2=config["options"]["guild2_id"]
+guilds=[int(guild_id_1),int(guild_id_2)]
 
 class CheckMcName(commands.Cog):
     def __init__(self, client):
         self.client = client
 
-    @commands.command(pass_context=True)
-    async def checkmcname(self, ctx, arg1):
+    @nextcord.slash_command(guild_ids=guilds, description="Check Wether A Minecraft Name Is Availble Or Not")
+    async def checkmcname(self, interaction: nextcord.Interaction, name: str = nextcord.SlashOption(description="The Name You Want To Check")):
         mcEmbed = nextcord.Embed(
-            title=f"{arg1}",
-            description=f"Click The Text Above To Check If The Username Is Availble Or Not \n\nRequested By <@{ctx.author.id}>",
-            url=f"https://namemc.com/search?q={arg1}",
+            title=f"{name}",
+            description=f"Click The Text Above To Check If The Username Is Availble Or Not",
+            url=f"https://namemc.com/search?q={name}",
             color=0x2852fa,
         )
-        await ctx.send(embed=mcEmbed)
-
-    @checkmcname.error
-    async def checkmcname_error(self, ctx, error):
-        if isinstance(error, commands.MissingRequiredArgument):
-            await ctx.send(f"<@{ctx.author.id}> \nThis Command Usage Is ` -CheckMcName [Name] `")
-
+        await interaction.response.send_message(embed=mcEmbed)
 
 # Setup
 def setup(client):
