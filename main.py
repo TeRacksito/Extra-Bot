@@ -47,8 +47,14 @@ async def kick_error(ctx,error):
     if isinstance(error,commands.MissingPermissions):
         await ctx.reply("You Don't Have The Permissions To Kick !")
 
+#Kick Command Exception
+@kick.error
+async def kick_error(ctx , error):
+    if isinstance(error, commands.MissingRequiredArgument):
+        await ctx.send(f"<@{ctx.author.id}> There is 1 or more missing argument(s) !")
+
 #Tell you your discord id useful in some cases
-@client.command(pass_context=True)#the pass_context = True allows argumentts
+@client.command(pass_context=True)#the pass_context = True allows argumentt
 async def Myid(ctx):
     await ctx.reply(ctx.author.id)
 
@@ -69,7 +75,7 @@ async def spam(ctx, arg1 ,arg2):
 @spam.error
 async def spam_error(ctx, error):
     if isinstance(error, commands.MissingRequiredArgument):
-        await ctx.send("1 Argument is missing")
+        await ctx.send(f"<@{ctx.author.id}> There is 1 missing argument !")
 
 #shutdown command
 @client.command()
@@ -86,9 +92,21 @@ async def shutdown(ctx):
 async def gSearch(ctx, arg):
     await ctx.reply(f"https://www.google.com/search?query={arg}")
 
+#Google Search Exception
+@gSearch.error
+async def gSearch_error(error,ctx):
+    if isinstance(error,commands.MissingRequiredArgument):
+        await ctx.send(f"<@{ctx.autor.id}> There is 1 missing argument !")
+
 #Youtube Search Command
 @client.command(pass_context=True)
 async def ytSearch(ctx, arg):
     await ctx.reply(f"https://www.youtube.com/results?search_query={arg}")    
+
+#Youtube Search Exception
+@ytSearch.error
+async def ytSearch_error(error,ctx):
+    if isinstance(error,commands.MissingRequiredArgument):
+        await ctx.send(f"<@{ctx.author.id}> There is 1 missing argument !")
 
 client.run(token)#runs the bot 
