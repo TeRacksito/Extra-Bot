@@ -58,4 +58,4 @@ async def gsearch(ctx, arg):
 async def ytvid(ctx, arg):
     await ctx.reply(f"https://www.youtube.com/results?search_query={arg}")    
 
-client.run(token)#runs the bot check the chat btw it has alot of stuff explained
+client.run(token)#runs the bot 
