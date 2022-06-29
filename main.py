@@ -1,5 +1,7 @@
+from pydoc import Helper
 import nextcord
 from nextcord.ext import commands
+from nextcord.ext.commands import has_permissions, MissingPermissions
 import os
 
 token=os.getenv('BOTTOKEN')#gets the environment variable that is the bot token i made one
@@ -7,7 +9,7 @@ token=os.getenv('BOTTOKEN')#gets the environment variable that is the bot token 
 intents = nextcord.Intents.default()
 intents.members = True
 intents.message_content = True
-client=commands.Bot(command_prefix='-',intents=intents)
+client=commands.Bot(command_prefix='-',intents=intents,help_command=None)
 
 #useful code
 @client.event
@@ -17,6 +19,24 @@ async def on_ready():
     await client.change_presence(activity=nextcord.Activity(type=nextcord.ActivityType.watching, name="This Server"))
     print("The Bot Is Up And Running")
     print("-------------------------")
+
+#Help command
+@client.command()
+async def help(ctx):
+    await ctx.reply("```-help - Display This Message \n-kick [Member] [Reason] - Kick A Spesific Member \n-spam [Message] [Number] - Spam A Spesific Message A Number Of Times \n-ytSearch [Query] - Search On Youtube For Query \n-gSearch [Quers] - Search On Google For Query```")
+
+#Kick command
+@client.command()
+@has_permissions(kick_members=True)
+async def kick(ctx,member: nextcord.Member, *, reason=None):
+    await member.kick(reason=reason)
+    await ctx.reply(f"Kicked {member} because {reason}")
+
+#Exeption in case if the member doen't have the permissions
+@kick.error
+async def kick_error(ctx,error):
+    if isinstance(error,commands.MissingPermissions):
+        await ctx.reply("You Don't Have The Permissions To Kick !")
 
 #Tell you your discord id useful in some cases
 @client.command(pass_context=True)#the pass_context = True allows argumentts
@@ -33,7 +53,6 @@ async def devPortal(ctx):
 async def spam(ctx, arg1 ,arg2):
     print("Starting Spam Sequence")
     number=int(arg2)
-    fnum=str(number)
     for i in range(number):
         await ctx.send(arg1)
     print("Spam Sequence Ended")
@@ -50,12 +69,12 @@ async def shutdown(ctx):
     
 #Google Search Command
 @client.command(pass_context=True)
-async def gsearch(ctx, arg):
+async def gSearch(ctx, arg):
     await ctx.reply(f"https://www.google.com/search?query={arg}")
 
 #Youtube Search Command
 @client.command(pass_context=True)
-async def ytvid(ctx, arg):
+async def ytSearch(ctx, arg):
     await ctx.reply(f"https://www.youtube.com/results?search_query={arg}")    
 
 client.run(token)#runs the bot 
