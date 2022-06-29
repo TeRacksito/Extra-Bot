@@ -23,7 +23,16 @@ async def on_ready():
 #Help command
 @client.command()
 async def help(ctx):
-    await ctx.reply("```-help - Display This Message \n-kick [Member] [Reason] - Kick A Spesific Member \n-spam [Message] [Number] - Spam A Spesific Message A Number Of Times \n-ytSearch [Query] - Search On Youtube For Query \n-gSearch [Quers] - Search On Google For Query```")
+    embed = nextcord.Embed(title="Commands" ,color=0x2852fa,description="-help - Display This Message \n-kick [Member] [Reason] - Kick A Spesific Member \n-spam [Message] [Number] - Spam A Spesific Message A Number Of Times \n-ytSearch [Query] - Search On Youtube For Query \n-gSearch [Quers] - Search On Google For Query \n-Myid - Tell You Your Id")
+    await ctx.reply(embed=embed)
+
+#Talk to the console
+@client.command(pass_context=True)
+async def Note(ctx,arg):
+    if ctx.author.id == 893102684855496724 or 835071335398244355:
+        print(arg)
+    else:
+        await ctx.reply("You Don't Have Permission To Send Messages To The Console !")
 
 #Kick command
 @client.command()
@@ -57,11 +66,16 @@ async def spam(ctx, arg1 ,arg2):
         await ctx.send(arg1)
     print("Spam Sequence Ended")
 
+@spam.error
+async def spam_error(ctx, error):
+    if isinstance(error, commands.MissingRequiredArgument):
+        await ctx.send("1 Argument is missing")
+
 #shutdown command
 @client.command()
 async def shutdown(ctx):
     #making sure not everone can't shutdown the bot
-    if ctx.author.id == 835071335398244355:
+    if ctx.author.id == 835071335398244355 or 893102684855496724:
         await ctx.reply("Shutting Down The Bot")
         quit()
     else:
