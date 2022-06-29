@@ -9,7 +9,7 @@ intents.members = True
 intents.message_content = True
 client=commands.Bot(command_prefix='-',intents=intents)
 
-#useless code
+#useful code
 @client.event
 async def on_ready():
     channel1 = client.get_channel(990095039533301820)
