@@ -9,7 +9,7 @@ class lyrics(commands.Cog):
     #lyrics command
     @commands.command(pass_context=True)
     async def lyrics(self,ctx,artist,song):
-        token=open("Z:\\discord bot (GITHUB)\\ghast-town-bot\\ghast-town-bot\\cogs\\genuisApiKey.txt","r")
+        token=open("Z:\\discord bot (GITHUB)\\ghast-town-bot\\genuisApiKey.txt","r")
         genius = Genius(token.read())
         artist = genius.search_artist(artist,max_songs=1)
         song = artist.song(song)
