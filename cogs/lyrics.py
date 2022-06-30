@@ -21,7 +21,7 @@ class lyrics(commands.Cog):
     @lyrics.error
     async def lyrics_error(self,ctx,error):
         if isinstance(error, commands.MissingRequiredArgument):
-            ctx.send(f"<@ctx.author.id> This Command Usage Is \n-lyrics [Artist Name] [Song]")
+           await ctx.send(f"<@{ctx.author.id}> This Command Usage Is : \n-lyrics [Artist Name] [Song]")
 
 
 
