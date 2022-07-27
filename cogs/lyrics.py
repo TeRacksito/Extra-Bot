@@ -1,3 +1,4 @@
+
 from lyricsgenius import Genius
 import nextcord
 from nextcord.ext import commands
@@ -9,7 +10,7 @@ class lyrics(commands.Cog):
     #lyrics command
     @commands.command(pass_context=True)
     async def lyrics(self,ctx,artist,song):
-        token=open("Z:\\discord bot (GITHUB)\\ghast-town-bot\\genuisApiKey.txt","r")
+        token=open("D:\\Shared\\discord bot (GITHUB)\\LyricsGenuisApiKey.txt","r")
         genius = Genius(token.read())
         artist = genius.search_artist(artist,max_songs=1)
         song = artist.song(song)
