@@ -1,8 +1,8 @@
-
 from lyricsgenius import Genius
 import nextcord
 from nextcord.ext import commands
 import os
+
 class lyrics(commands.Cog):
     def __init__(self,client):
         self.client = client
