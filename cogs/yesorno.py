@@ -11,7 +11,7 @@ class yesorno(commands.Cog):
     async def yesorno(self, ctx , arg1):
         answers = ["Yes", "No", "Of Course", "Of Course No", "I Can't Decide", "Si"]
         Embed = nextcord.Embed(title=arg1, description=f"{choice(answers)} \n \n Requested By <@{ctx.author.id}>", color=0x2852fa)
-        await ctx.send(embed=Embed)
+        await ctx.author.reply(embed=Embed)
         
     @yesorno.error
     async def yesorno_error(self, ctx , error):
