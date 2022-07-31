@@ -12,7 +12,7 @@ class getid(commands.Cog):
         title=f"{member._user}'s Id",
         color=0x2852fa, 
         description=f"The Id Of {member._user} is {member.id}")
-        IdEmbed.set_image(member.avatar.url)
+        IdEmbed.set_thumbnail(member.avatar.url)
         await ctx.send(embed=IdEmbed)
 
     @getid.error

@@ -13,6 +13,7 @@ class gsearch(commands.Cog):
         url=f"https://www.google.com/search?query={arg}",
         color=0x2852fa,
         )
+        gEmbed.set_thumbnail("https://cdn.discordapp.com/attachments/991958269012758548/1003379889069641758/google.png")
         await ctx.send(embed=gEmbed)
 
     #Google Search Exception

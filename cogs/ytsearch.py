@@ -14,6 +14,7 @@ class ytsearch(commands.Cog):
         description=f"Click The Text Above To Got To Your Youtube Search \n\nRequested By <@{ctx.author.id}>",
         url=f"https://www.youtube.com/results?search_query={arg}"
         )
+        ytEmbed.set_thumbnail("https://cdn.discordapp.com/attachments/991958269012758548/1003381079832543363/youtube.png")
         await ctx.send(embed=ytEmbed)    
 
     #Youtube Search Exception
