@@ -8,7 +8,13 @@ class ytsearch(commands.Cog):
     #Youtube Search Command
     @commands.command(pass_context=True)
     async def ytSearch(self,ctx, arg):
-        await ctx.reply(f"https://www.youtube.com/results?search_query={arg}")    
+        ytEmbed = nextcord.Embed(
+        title=arg,
+        color=0x2852fa,
+        description=f"Click The Text Above To Got To Your Youtube Search \n\nRequested By <@{ctx.author.id}>",
+        url=f"https://www.youtube.com/results?search_query={arg}"
+        )
+        await ctx.send(embed=ytEmbed)    
 
     #Youtube Search Exception
     @ytSearch.error

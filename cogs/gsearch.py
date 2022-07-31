@@ -7,7 +7,13 @@ class gsearch(commands.Cog):
     #Google Search Command
     @commands.command(pass_context=True)
     async def gSearch(self,ctx, arg):
-        await ctx.reply(f"https://www.google.com/search?query={arg}")
+        gEmbed = nextcord.Embed(
+        title=arg,
+        description=f"Click The Text Above To Go To Your Google Search \n\nRequested By <@{ctx.author.id}>",
+        url=f"https://www.google.com/search?query={arg}",
+        color=0x2852fa,
+        )
+        await ctx.send(embed=gEmbed)
 
     #Google Search Exception
     @gSearch.error
