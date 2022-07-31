@@ -1,4 +1,3 @@
-from click import pass_context
 import nextcord
 from nextcord.ext import commands
 
@@ -15,6 +14,12 @@ class checkmcname(commands.Cog):
         color=0x2852fa,
         )
         await ctx.send(embed=mcEmbed)
+    
+    @checkmcname.error
+    async def checkmcname_error(self, ctx, error):
+        if isinstance(error , commands.MissingRequiredArgument):
+            await ctx.send(f"<@{ctx.author.id}> \nThis Command Usage Is ` -CheckMcName [Name] `")
+
 #Setup
 def setup(client):
     client.add_cog(checkmcname(client))
