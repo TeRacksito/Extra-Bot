@@ -10,8 +10,8 @@ class lyrics(commands.Cog):
     #lyrics command
     @commands.command(pass_context=True)
     async def lyrics(self,ctx,artist,song):
-        token=open("D:\\Shared\\discord bot (GITHUB)\\LyricsGenuisApiKey.txt","r")
-        genius = Genius(token.read())
+        token=os.getenv('GENTOKEN')
+        genius = Genius(token)
         artist = genius.search_artist(artist,max_songs=1)
         song = artist.song(song)
         
