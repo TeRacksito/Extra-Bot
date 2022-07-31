@@ -11,7 +11,7 @@ class help(commands.Cog):
         embed = nextcord.Embed(
         title="Commands",
         color=0x2852fa,
-        description=f"-Help - Display This Message \n-Kick [Member] [Reason] - Kick A Spesific Member\n-YtSearch [Query] - Search On Youtube For Query \n-GSearch [Query] - Search On Google For Query \n-Myid - Tell You Your Id \n-Lyrics [Artist] [Song] - Search For A Song's Lyrics By Artist \n-YesOrNo [Question] - Ask The Bot A Question \n-CheckMcName [Name] - Check If A Minecraft Name Is Availbe Or Not \n-GetId [Member] - Get The Id Of A Member And Send It \n-psxSearch [Pet] - Search A PSX Pet  \n \n Requested By <@{ctx.author.id}>"
+        description=f"-Help - Display This Message \n-Ban [Member] [Reason] - Ban A Spesific Member From The Server \n-Kick [Member] [Reason] - Kick A Spesific Member\n-YtSearch [Query] - Search On Youtube For Query \n-GSearch [Query] - Search On Google For Query \n-Myid - Tell You Your Id \n-Lyrics [Artist] [Song] - Search For A Song's Lyrics By Artist \n-YesOrNo [Question] - Ask The Bot A Question \n-CheckMcName [Name] - Check If A Minecraft Name Is Availbe Or Not \n-GetId [Member] - Get The Id Of A Member And Send It \n-psxSearch [Pet] - Search A PSX Pet  \n \n Requested By <@{ctx.author.id}>"
         )
         await ctx.send(embed=embed)
 
