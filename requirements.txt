@@ -1,2 +1,4 @@
 nextcord
+nextcord[voice]
 lyricsgenius
+youtube_dl
