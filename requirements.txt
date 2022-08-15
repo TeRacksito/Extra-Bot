@@ -1,4 +1,5 @@
 nextcord
 nextcord[voice]
+nextcord[speed]
 lyricsgenius
 youtube_dl
