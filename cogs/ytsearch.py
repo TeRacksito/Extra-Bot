@@ -7,24 +7,16 @@ class YTSearch(commands.Cog):
         self.client = client
 
     # Youtube Search Command
-    @commands.command(pass_context=True)
-    async def ytSearch(self, ctx, arg):
+    @nextcord.slash_command(guild_ids=[977477205573652518], description="Youtube Search Command")
+    async def ytsearch(self, interaction:nextcord.Interaction, query: str = nextcord.SlashOption(description="Query", required=True)):
         ytEmbed = nextcord.Embed(
-            title=arg,
+            title=query,
             color=0x2852fa,
-            description=f"Click The Text Above To Got To Your Youtube Search \n\nRequested By <@{ctx.author.id}>",
-            url=f"https://www.youtube.com/results?search_query={arg}"
+            description=f"Click The Text Above To Got To Your Youtube Search",
+            url=f"https://www.youtube.com/results?search_query={query}"
         )
         ytEmbed.set_thumbnail("https://cdn.discordapp.com/attachments/991958269012758548/1003381079832543363/youtube.png")
-        await ctx.send(embed=ytEmbed)
-
-        # Youtube Search Exception
-
-    @ytSearch.error
-    async def ytSearch_error(self, error, ctx):
-        if isinstance(error, commands.MissingRequiredArgument):
-            await ctx.send(f"<@{ctx.author.id}> \nThe Command Usage Of This Command Is ` -ytSearch [Query]")
-
+        await interaction.response.send_message(embed=ytEmbed)
 
 # Setup
 def setup(client):

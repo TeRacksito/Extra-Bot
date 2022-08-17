@@ -7,23 +7,16 @@ class GoogleSearch(commands.Cog):
         self.client = client
 
     # Google Search Command
-    @commands.command(pass_context=True)
-    async def gSearch(self, ctx, arg):
+    @nextcord.slash_command(guild_ids=[977477205573652518], description="Google Search Command")
+    async def gsearch(self, interaction:nextcord.Interaction, query: str = nextcord.SlashOption(description="Query", required=True)):
         gEmbed = nextcord.Embed(
-            title=arg,
-            description=f"Click The Text Above To Go To Your Google Search \n\nRequested By <@{ctx.author.id}>",
-            url=f"https://www.google.com/search?query={arg}",
+            title=query,
+            description=f"Click The Text Above To Go To Your Google Search",
+            url=f"https://www.google.com/search?query={query}",
             color=0x2852fa,
         )
         gEmbed.set_thumbnail("https://cdn.discordapp.com/attachments/991958269012758548/1003379889069641758/google.png")
-        await ctx.send(embed=gEmbed)
-
-    # Google Search Exception
-    @gSearch.error
-    async def gSearch_error(self, error, ctx):
-        if isinstance(error, commands.MissingRequiredArgument):
-            await ctx.send(f"<@{ctx.autor.id}> \nThe Command Usage Of This Command Is ` -gSearch [Query]")
-
+        await interaction.response.send_message(embed=gEmbed)
 
 # Setup
 def setup(client):
