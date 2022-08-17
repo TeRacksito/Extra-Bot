@@ -8,18 +8,17 @@ class ApplicationCommandCog(commands.Cog):
     def __init__(self, client):
         self.client = client
 
-    @nextcord.slash_command(guild_ids=[TESTING_GUILD_ID], description="Test command")
+    @nextcord.slash_command(guild_ids=[TESTING_GUILD_ID,977477205573652518], description="Test command")
     async def my_slash_command(self, interaction: nextcord.Interaction):
         await interaction.response.send_message("This is a slash command in a cog!")
 
-    @nextcord.user_command(guild_ids=[TESTING_GUILD_ID])
+    @nextcord.user_command(guild_ids=[TESTING_GUILD_ID,977477205573652518])
     async def my_user_command(self, interaction: nextcord.Interaction, member: nextcord.Member):
         await interaction.response.send_message(f"Hello, {member}!")
 
-    @nextcord.message_command(guild_ids=[TESTING_GUILD_ID])
+    @nextcord.message_command(guild_ids=[TESTING_GUILD_ID,977477205573652518])
     async def my_message_command(
-        self, interaction: nextcord.Interaction, message: nextcord.Message
-    ):
+        self, interaction: nextcord.Interaction, message: nextcord.Message):
         await interaction.response.send_message(f"{message}")
 
 

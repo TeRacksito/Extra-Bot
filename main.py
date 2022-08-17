@@ -19,7 +19,7 @@ async def on_ready():
 #Cogs
 innitial_extensions = []
 
-for i in os.listdir(".\cogs"):
+for i in os.listdir("cogs"):
     if i.endswith(".py"):
         innitial_extensions.append("cogs." + i[:-3])
 
