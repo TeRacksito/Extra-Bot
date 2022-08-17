@@ -5,4 +5,4 @@ Then make an environment variable and call it BOTTOKEN and set the value to the 
 And for order for the lyrics command to work make an account on https://genius.com and go to https://genius.com/api-clients 
 then make an application then copy the client secret then make an environment variable and call it GENTOKEN and paste the client secret there 
 
-NOTE : I may make a video tutorial and remove this readme.md
+NOTE : I may make a video tutorial and Add it beside this 
