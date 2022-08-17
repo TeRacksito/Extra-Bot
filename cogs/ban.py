@@ -2,30 +2,32 @@ import nextcord
 from nextcord.ext import commands
 from nextcord.ext.commands import has_permissions
 
-class ban(commands.Cog):
+
+class Ban(commands.Cog):
     def __init__(self, client):
         self.client = client
-    
-    #ban command
+
+    # ban command
     @commands.command()
     @has_permissions(ban_members=True)
-    async def ban(self,ctx,member: nextcord.Member, *, reason=None):
+    async def ban(self, ctx, member: nextcord.Member, *, reason=None):
         await member.ban(reason=reason)
         await ctx.reply(f"Banned {member}\nReason:{reason}")
         await member.send(f"You Got Ban From The Server \nReason:{reason}")
 
-    #Exeption in case if the member doen't have the permissions
+    # Exeption in case if the member doen't have the permissions
     @ban.error
-    async def ban_error(self,ctx,error):
-        if isinstance(error,commands.MissingPermissions):
+    async def ban_error(self, ctx, error):
+        if isinstance(error, commands.MissingPermissions):
             await ctx.reply("You Don't Have The Permissions To Ban !")
 
-    #ban Command Exception
+    # ban Command Exception
     @ban.error
-    async def ban_error(self,ctx , error):
+    async def ban_error(self, ctx, error):
         if isinstance(error, commands.MissingRequiredArgument):
             await ctx.send(f"<@{ctx.author.id}> \nThis Command Usage Is ` -ban [member] [reason] `")
 
-#Setup 
+
+# Setup
 def setup(client):
-    client.add_cog(ban(client))
+    client.add_cog(Ban(client))

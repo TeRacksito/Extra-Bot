@@ -1,31 +1,31 @@
-from lyricsgenius import Genius
 import nextcord
-from nextcord.ext import commands
 import os
+from lyricsgenius import Genius
+from nextcord.ext import commands
 
-class lyrics(commands.Cog):
-    def __init__(self,client):
+
+class Lyrics(commands.Cog):
+    def __init__(self, client):
         self.client = client
 
-    #lyrics command
+    # lyrics command
     @commands.command(pass_context=True)
-    async def lyrics(self,ctx,artist,song):
-        token=os.getenv('GENTOKEN')
+    async def lyrics(self, ctx, artist, song):
+        token = os.getenv('GENTOKEN')
         genius = Genius(token)
-        artist = genius.search_artist(artist,max_songs=1)
+        artist = genius.search_artist(artist, max_songs=1)
         song = artist.song(song)
-        
+
         embed = nextcord.Embed(title=song.title + " by " + song.artist, description=song.lyrics, color=0x2852fa)
         await ctx.reply(embed=embed)
 
-    #lyrics command exception
+    # lyrics command exception
     @lyrics.error
-    async def lyrics_error(self,ctx,error):
+    async def lyrics_error(self, ctx, error):
         if isinstance(error, commands.MissingRequiredArgument):
-           await ctx.send(f"<@{ctx.author.id}> This Command Usage Is : \n-lyrics [Artist Name] [Song]")
+            await ctx.send(f"<@{ctx.author.id}> This Command Usage Is : \n-lyrics [Artist Name] [Song]")
 
 
-
-#Setup 
+# Setup
 def setup(client):
-    client.add_cog(lyrics(client))
+    client.add_cog(Lyrics(client))
