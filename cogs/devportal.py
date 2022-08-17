@@ -2,7 +2,7 @@ import nextcord
 from nextcord.ext import commands
 
 
-class devportal(commands.Cog):
+class DevPortal(commands.Cog):
     def __init__(self, client):
         self.client = client
 
@@ -14,4 +14,4 @@ class devportal(commands.Cog):
 
 # Setup
 def setup(client):
-    client.add_cog(devportal(client))
+    client.add_cog(DevPortal(client))

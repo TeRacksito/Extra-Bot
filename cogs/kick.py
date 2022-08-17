@@ -3,7 +3,7 @@ from nextcord.ext import commands
 from nextcord.ext.commands import has_permissions
 
 
-class kick(commands.Cog):
+class Kick(commands.Cog):
     def __init__(self, client):
         self.client = client
 
@@ -30,4 +30,4 @@ class kick(commands.Cog):
 
 # Setup
 def setup(client):
-    client.add_cog(kick(client))
+    client.add_cog(Kick(client))

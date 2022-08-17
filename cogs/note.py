@@ -2,7 +2,7 @@ import nextcord
 from nextcord.ext import commands
 
 
-class note(commands.Cog):
+class Note(commands.Cog):
     def __init__(self, client):
         self.client = client
 
@@ -17,4 +17,4 @@ class note(commands.Cog):
 
 # setup
 def setup(client):
-    client.add_cog(note(client))
+    client.add_cog(Note(client))

@@ -2,7 +2,7 @@ import nextcord
 from nextcord.ext import commands
 
 
-class shutdown(commands.Cog):
+class Shutdown(commands.Cog):
     def __init__(self, client):
         self.client = client
 
@@ -19,4 +19,4 @@ class shutdown(commands.Cog):
 
 # Setup
 def setup(client):
-    client.add_cog(shutdown(client))
+    client.add_cog(Shutdown(client))

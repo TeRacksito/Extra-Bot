@@ -4,7 +4,7 @@ import youtube_dl
 from nextcord.ext import commands
 
 
-class music(commands.Cog):
+class Music(commands.Cog):
     @commands.command(pass_context=True)
     async def play(self, ctx, url):
         yt_dl_options = {"format": "bestaudio/best"}
@@ -34,4 +34,4 @@ class music(commands.Cog):
 
 # setup
 def setup(client):
-    client.add_cog(music(client))
+    client.add_cog(Music(client))

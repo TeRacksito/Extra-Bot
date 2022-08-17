@@ -2,7 +2,7 @@ import nextcord
 from nextcord.ext import commands
 
 
-class ytsearch(commands.Cog):
+class YTSearch(commands.Cog):
     def __init__(self, client):
         self.client = client
 
@@ -28,4 +28,4 @@ class ytsearch(commands.Cog):
 
 # Setup
 def setup(client):
-    client.add_cog(ytsearch(client))
+    client.add_cog(YTSearch(client))

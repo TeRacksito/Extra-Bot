@@ -2,7 +2,7 @@ import nextcord
 from nextcord.ext import commands
 
 
-class gsearch(commands.Cog):
+class GoogleSearch(commands.Cog):
     def __init__(self, client):
         self.client = client
 
@@ -27,4 +27,4 @@ class gsearch(commands.Cog):
 
 # Setup
 def setup(client):
-    client.add_cog(gsearch(client))
+    client.add_cog(GoogleSearch(client))

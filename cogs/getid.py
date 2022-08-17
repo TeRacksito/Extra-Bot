@@ -2,7 +2,7 @@ import nextcord
 from nextcord.ext import commands
 
 
-class getid(commands.Cog):
+class GetID(commands.Cog):
     def __init__(self, client):
         self.client = client
 
@@ -24,4 +24,4 @@ class getid(commands.Cog):
 
 # Setup
 def setup(client):
-    client.add_cog(getid(client))
+    client.add_cog(GetID(client))

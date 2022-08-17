@@ -3,7 +3,7 @@ from nextcord.ext import commands
 from random import choice, shuffle
 
 
-class yesorno(commands.Cog):
+class YesOrNo(commands.Cog):
     def __init__(self, client):
         self.client = client
 
@@ -22,4 +22,4 @@ class yesorno(commands.Cog):
 
 # Setup
 def setup(client):
-    client.add_cog(yesorno(client))
+    client.add_cog(YesOrNo(client))

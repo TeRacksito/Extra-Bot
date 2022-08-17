@@ -2,7 +2,7 @@ import nextcord
 from nextcord.ext import commands
 
 
-class checkmcname(commands.Cog):
+class CheckMcName(commands.Cog):
     def __init__(self, client):
         self.client = client
 
@@ -24,4 +24,4 @@ class checkmcname(commands.Cog):
 
 # Setup
 def setup(client):
-    client.add_cog(checkmcname(client))
+    client.add_cog(CheckMcName(client))

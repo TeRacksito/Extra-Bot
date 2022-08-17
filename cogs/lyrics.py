@@ -4,7 +4,7 @@ from lyricsgenius import Genius
 from nextcord.ext import commands
 
 
-class lyrics(commands.Cog):
+class Lyrics(commands.Cog):
     def __init__(self, client):
         self.client = client
 
@@ -28,4 +28,4 @@ class lyrics(commands.Cog):
 
 # Setup
 def setup(client):
-    client.add_cog(lyrics(client))
+    client.add_cog(Lyrics(client))

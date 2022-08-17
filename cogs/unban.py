@@ -3,7 +3,7 @@ from nextcord.ext import commands
 from nextcord.ext.commands import has_permissions
 
 
-class unban(commands.Cog):
+class Unban(commands.Cog):
     def __init__(self, client):
         self.client = client
 
@@ -30,4 +30,4 @@ class unban(commands.Cog):
 
 # Setup
 def setup(client):
-    client.add_cog(unban(client))
+    client.add_cog(Unban(client))
