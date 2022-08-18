@@ -1,13 +1,19 @@
 import nextcord
 from nextcord.ext import commands
+from configparser import ConfigParser
 
+config=ConfigParser()
+config.read(".\config.ini")
+guild_id_1=config["options"]["guild1_id"]
+guild_id_2=config["options"]["guild2_id"]
+guilds=[int(guild_id_1),int(guild_id_2)]
 
 class GoogleSearch(commands.Cog):
     def __init__(self, client):
         self.client = client
 
     # Google Search Command
-    @nextcord.slash_command(guild_ids=[977477205573652518], description="Google Search Command")
+    @nextcord.slash_command(guild_ids=guilds, description="Google Search Command")
     async def gsearch(self, interaction:nextcord.Interaction, query: str = nextcord.SlashOption(description="Query", required=True)):
         gEmbed = nextcord.Embed(
             title=query,
