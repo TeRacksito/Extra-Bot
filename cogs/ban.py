@@ -22,12 +22,6 @@ class Ban(commands.Cog):
         await member.ban(reason=reason)
         await interaction.response.send_message(f"Banned {member}\nReason:{reason}")
 
-    # Exeption in case if the member doen't have the permissions
-    @ban.error
-    async def ban_error(self, ctx, error):
-        if isinstance(error, commands.MissingPermissions):
-            await ctx.reply("You Don't Have The Permissions To Ban !")
-
 # Setup
 def setup(client):
     client.add_cog(Ban(client))
