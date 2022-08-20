@@ -17,10 +17,10 @@ class Ban(commands.Cog):
     # ban command
     @nextcord.slash_command(guild_ids=guilds, description="Ban Sepcified Member")
     @has_permissions(ban_members=True)
-    async def ban(self, interaction: nextcord.Interaction, member: nextcord.Member, *, reason=None):
+    async def ban(self, interaction: nextcord.Interaction, member: nextcord.Member, *, reason: str = nextcord.SlashOption(description="The Reason You Want To Ban The Member", required=True)):
+        await member.send(f"You Got Ban From The Server \nReason:{reason}")
         await member.ban(reason=reason)
         await interaction.response.send_message(f"Banned {member}\nReason:{reason}")
-        await member.send(f"You Got Ban From The Server \nReason:{reason}")
 
     # Exeption in case if the member doen't have the permissions
     @ban.error
