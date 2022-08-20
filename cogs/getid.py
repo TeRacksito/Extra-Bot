@@ -21,7 +21,8 @@ class GetID(commands.Cog):
             color=0x2852fa,
             description=f"The Id Of {member._user} is {member.id}")
         IdEmbed.set_thumbnail(member.avatar.url)
-        await interaction.response.send_message(embed=IdEmbed)
+        await interaction.response.defer()
+        await interaction.followup.send(embed=IdEmbed)
 
 # Setup
 def setup(client):

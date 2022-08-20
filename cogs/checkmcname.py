@@ -20,7 +20,8 @@ class CheckMcName(commands.Cog):
             url=f"https://namemc.com/search?q={name}",
             color=0x2852fa,
         )
-        await interaction.response.send_message(embed=mcEmbed)
+        await interaction.response.defer()
+        await interaction.followup.send(embed=mcEmbed)
 
 # Setup
 def setup(client):

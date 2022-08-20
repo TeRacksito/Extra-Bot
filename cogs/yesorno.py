@@ -18,6 +18,7 @@ class YesOrNo(commands.Cog):
         answers = ["Yes", "No", "Of Course", "Of Course ||No||", "I Can't Decide","是的，但是中文","不"]
         shuffle(answers)
         Embed = nextcord.Embed(title=question, description=f"{choice(answers)}", color=0x2852fa)
+        await interaction.response.defer()
         await interaction.response.send_message(embed=Embed)
 
 # Setup

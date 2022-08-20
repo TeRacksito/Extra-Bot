@@ -18,7 +18,8 @@ class MyID(commands.Cog):
 
     @nextcord.slash_command(guild_ids=guilds, description="Tell You Your Id In Discord")
     async def myid(self, interaction: nextcord.Interaction):
-        await interaction.response.send_message(f"{interaction.user.id} Is Your Id")
+        await interaction.response.defer()
+        await interaction.followup.send(f"{interaction.user.id} Is Your Id")
 
 
 # Setup

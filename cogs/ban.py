@@ -20,7 +20,8 @@ class Ban(commands.Cog):
     async def ban(self, interaction: nextcord.Interaction, member: nextcord.Member, *, reason: str = nextcord.SlashOption(description="The Reason You Want To Ban The Member", required=True)):
         await member.send(f"You Got Ban From The Server \nReason:{reason}")
         await member.ban(reason=reason)
-        await interaction.response.send_message(f"Banned {member}\nReason:{reason}")
+        await interaction.response.defer()
+        await interaction.followup.send(f"Banned {member}\nReason:{reason}")
 
 # Setup
 def setup(client):

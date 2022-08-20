@@ -22,7 +22,8 @@ class YTSearch(commands.Cog):
             url=f"https://www.youtube.com/results?search_query={query}"
         )
         ytEmbed.set_thumbnail("https://cdn.discordapp.com/attachments/991958269012758548/1003381079832543363/youtube.png")
-        await interaction.response.send_message(embed=ytEmbed)
+        await interaction.response.defer()
+        await interaction.followup.send(embed=ytEmbed)
 
 # Setup
 def setup(client):
