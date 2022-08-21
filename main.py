@@ -1,13 +1,23 @@
+from sys import prefix
 import nextcord
 import os
 from nextcord.ext import commands
+import configparser
 
-token = os.getenv('BOTTOKEN')  # gets the environment variable that is the bot token i made one
+config=configparser.ConfigParser()
+config.read("config.ini")
+
+prefix=config["options"]["prefix"]
+
+if config["options"]["tokenInConfig"].lower() == "false":
+    token = os.getenv('BOTTOKEN')
+else:
+    token = config["options"]["token"]
 
 intents = nextcord.Intents.default()
 intents.members = True
 intents.message_content = True
-client = commands.Bot(command_prefix='-', intents=intents, help_command=None, case_insensitive=True)
+client = commands.Bot(command_prefix=prefix, intents=intents, help_command=None, case_insensitive=True)
 
 
 # useful code
