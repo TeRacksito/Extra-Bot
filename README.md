@@ -1,4 +1,4 @@
-# eXtreme Bot
+# Extra Bot
 
 An Open Source Discord Bot Made With Python And Nextcord Library
 To get started go to discord developer portal and create a bot then copy the token
