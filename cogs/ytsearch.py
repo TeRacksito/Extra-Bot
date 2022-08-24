@@ -1,9 +1,14 @@
 import nextcord
 from nextcord.ext import commands
 from configparser import ConfigParser
+from sys import platform
 
 config=ConfigParser()
-config.read(".\config.ini")
+if platform == "linux" or platform == "linux2":
+    config.read("../config.ini")
+elif platform == "win32":
+    config.read(".\config.ini")
+    
 guild_id_1=config["options"]["guild1_id"]
 guild_id_2=config["options"]["guild2_id"]
 guilds=[int(guild_id_1),int(guild_id_2)]
