@@ -40,10 +40,10 @@ pip3 install -r requirements.txt
 Start the server
 
 ```bash
-  #Windows
-  python main.py
-  #Linux
-  python3 main.py
+#Windows
+python main.py
+#Linux
+python3 main.py
 ```
 
 Note: You may need to configure the config.ini file.
