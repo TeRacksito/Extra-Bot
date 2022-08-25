@@ -19,22 +19,22 @@ Note: for a full list of Commands execute /help
 Clone the project
 
 ```bash
-  git clone https://github.com/Ahmed3457/Extra-Bot
+git clone https://github.com/Ahmed3457/Extra-Bot
 ```
 
 Go to the project directory
 
-```bash
-  cd Extra-Bot
+```bash 
+cd Extra-Bot
 ```
 
 Install dependencies
 
 ```bash
-  #Windows
-  pip install -r requirements.txt
-  #Linux
-  pip3 install -r requirements.txt
+#Windows
+pip install -r requirements.txt
+#Linux
+pip3 install -r requirements.txt
 ```
 
 Start the server
@@ -47,6 +47,7 @@ Start the server
 ```
 
 Note: You may need to configure the config.ini file.
+another Note: This is not working on linux So if fix it if you know how it will help me ALOT ;)
 ## Contributing
 
 This project is WIP so Contributions are always welcome!
