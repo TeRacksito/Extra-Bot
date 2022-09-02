@@ -9,10 +9,12 @@ An open-source Discord bot made in Python and the Nextcord library
 
 - A ban command
 - A Kick Comand
-- Music Commands
-- A Config File
-- And more
-Note: for a full list of Commands execute /help
+- Music Commands 🎧
+- Compatible With Linux 🐧
+- A Config File (cogs/lib/values.py) ⚙️
+- And more ✨
+
+### Note: for a full list of Commands execute /help
 
 ## Run Locally
 
@@ -46,12 +48,10 @@ python main.py
 python3 main.py
 ```
 
-Note: You may need to configure the config.ini file.
-another Note: This is not working on linux So if fix it if you know how it will help me ALOT ;)
+Note: You may need to configure the cogs/lib/values.py file.
 ## Contributing
 
 This project is WIP so Contributions are always welcome!
-Also if you know how to fix that the project is not working on linux help me 
 
 
 
