@@ -1,17 +1,10 @@
-import nextcord
+import nextcord, sys
 from nextcord.ext import commands
-from configparser import ConfigParser
-from sys import platform
+sys.path.insert(1, 'cogs\lib')
+import values as v
 
-config=ConfigParser()
-if platform == "linux" or platform == "linux2":
-    config.read("../config.ini")
-elif platform == "win32":
-    config.read(".\config.ini")
- 
-guild_id_1=config["options"]["guild1_id"]
-guild_id_2=config["options"]["guild2_id"]
-guilds=[int(guild_id_1),int(guild_id_2)]
+guilds=v.values.getData("guilds")
+embedColor=v.values.getData("color")
 
 class Help(commands.Cog):
     def __init__(self, client):
@@ -22,7 +15,7 @@ class Help(commands.Cog):
     async def help(self, interaction: nextcord.Interaction):
         embed = nextcord.Embed(
             title="Commands",
-            color=0x2852fa,
+            color=embedColor,
             description=f"-Help - Display This Message \n-Ban [Member] [Reason] - Ban A Spesific Member From The Server \n-Kick [Member] [Reason] - Kick A Spesific Member\n-YtSearch [Query] - Search On Youtube For Query \n-GSearch [Query] - Search On Google For Query \n-Myid - Tell You Your Id \n-YesOrNo [Question] - Ask The Bot A Question \n-CheckMcName [Name] - Check If A Minecraft Name Is Availbe Or Not \n-GetId [Member] - Get The Id Of A Member And Send It\n-Play [Song Url] - Play The Song From The Youtube Url\n-Stop - Stop The Song That's Currently Playing"
         )
         await interaction.response.defer()

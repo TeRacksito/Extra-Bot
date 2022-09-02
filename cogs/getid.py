@@ -1,18 +1,10 @@
-import nextcord
+import nextcord, sys 
 from nextcord.ext import commands
-from configparser import ConfigParser
-from sys import platform
+sys.path.insert(1, 'cogs\lib')
+import values as v
 
-config=ConfigParser()
-if platform == "linux" or platform == "linux2":
-    config.read("../config.ini")
-elif platform == "win32":
-    config.read(".\config.ini")
- 
-guild_id_1=config["options"]["guild1_id"]
-guild_id_2=config["options"]["guild2_id"]
-guilds=[int(guild_id_1),int(guild_id_2)]
-
+guilds=v.values.getData("guilds")
+embedColor=v.values.getData("color")
 
 class GetID(commands.Cog):
     def __init__(self, client):
@@ -23,7 +15,7 @@ class GetID(commands.Cog):
     async def getid(self, interaction: nextcord.Interaction, member: nextcord.Member):
         IdEmbed = nextcord.Embed(
             title=f"{member._user}'s Id",
-            color=0x2852fa,
+            color=embedColor,
             description=f"The Id Of {member._user} is {member.id}")
         IdEmbed.set_thumbnail(member.avatar.url)
         await interaction.response.defer()

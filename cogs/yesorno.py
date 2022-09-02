@@ -1,18 +1,11 @@
-import nextcord
+import nextcord,sys
 from nextcord.ext import commands
 from random import choice, shuffle
-from configparser import ConfigParser
-from sys import platform
+sys.path.insert(1, 'cogs\lib')
+import values as v
 
-config=ConfigParser()
-if platform == "linux" or platform == "linux2":
-    config.read("../config.ini")
-elif platform == "win32":
-    config.read(".\config.ini")
-     
-guild_id_1=config["options"]["guild1_id"]
-guild_id_2=config["options"]["guild2_id"]
-guilds=[int(guild_id_1),int(guild_id_2)]
+guilds=v.values.getData("guilds")
+embedColor=v.values.getData("color")
 
 class YesOrNo(commands.Cog):
     def __init__(self, client):
@@ -22,7 +15,7 @@ class YesOrNo(commands.Cog):
     async def yesorno(self, interaction: nextcord.Interaction, question: str = nextcord.SlashOption(description="Question", required=True)):
         answers = ["Yes", "No", "Of Course", "Of Course ||No||", "I Can't Decide","是的，但是中文","不"]
         shuffle(answers)
-        Embed = nextcord.Embed(title=question, description=f"{choice(answers)}", color=0x2852fa)
+        Embed = nextcord.Embed(title=question, description=f"{choice(answers)}", color=embedColor)
         await interaction.response.defer()
         await interaction.response.send_message(embed=Embed)
 

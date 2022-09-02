@@ -1,17 +1,10 @@
-import nextcord
+import nextcord,sys
 from nextcord.ext import commands
-from configparser import ConfigParser
-from sys import platform
+sys.path.insert(1, 'cogs\lib')
+import values as v
 
-config=ConfigParser()
-if platform == "linux" or platform == "linux2":
-    config.read("../config.ini")
-elif platform == "win32":
-    config.read(".\config.ini")
-    
-guild_id_1=config["options"]["guild1_id"]
-guild_id_2=config["options"]["guild2_id"]
-guilds=[int(guild_id_1),int(guild_id_2)]
+guilds=v.values.getData("guilds")
+embedColor=v.values.getData("color")
 
 class YTSearch(commands.Cog):
     def __init__(self, client):
@@ -22,7 +15,7 @@ class YTSearch(commands.Cog):
     async def ytsearch(self, interaction:nextcord.Interaction, query: str = nextcord.SlashOption(description="Query", required=True)):
         ytEmbed = nextcord.Embed(
             title=query,
-            color=0x2852fa,
+            color=embedColor,
             description=f"Click The Text Above To Got To Your Youtube Search",
             url=f"https://www.youtube.com/results?search_query={query}"
         )

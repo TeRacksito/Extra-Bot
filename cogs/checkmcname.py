@@ -1,17 +1,10 @@
-import nextcord
+import nextcord, sys
 from nextcord.ext import commands
-from configparser import ConfigParser
-from sys import platform
+sys.path.insert(1, 'cogs\lib')
+import values as v
 
-config=ConfigParser()
-if platform == "linux" or platform == "linux2":
-    config.read("../config.ini")
-elif platform == "win32":
-    config.read(".\config.ini")
- 
-guild_id_1=config["options"]["guild1_id"]
-guild_id_2=config["options"]["guild2_id"]
-guilds=[int(guild_id_1),int(guild_id_2)]
+guilds=v.values.getData("guilds")
+embedColor=v.values.getData("color")
 
 class CheckMcName(commands.Cog):
     def __init__(self, client):
@@ -23,7 +16,7 @@ class CheckMcName(commands.Cog):
             title=f"{name}",
             description=f"Click The Text Above To Check If The Username Is Availble Or Not",
             url=f"https://namemc.com/search?q={name}",
-            color=0x2852fa,
+            color=embedColor,
         )
         await interaction.response.defer()
         await interaction.followup.send(embed=mcEmbed)

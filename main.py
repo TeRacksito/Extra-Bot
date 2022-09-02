@@ -1,18 +1,13 @@
-from sys import prefix
 import nextcord
-import os
+import os, sys
 from nextcord.ext import commands
-import configparser
+sys.path.insert(1, 'cogs/lib')
+import values as v
 
-config=configparser.ConfigParser()
-config.read("config.ini")
+prefix=v.values.getData("prefix")
+configData=v.values.getData("tokendetails")
 
-prefix=config["options"]["prefix"]
-
-if config["options"]["tokenInConfig"].lower() == "false":
-    token = os.getenv('BOTTOKEN')
-else:
-    token = config["options"]["token"]
+token = os.getenv('BOTTOKEN')
 
 intents = nextcord.Intents.default()
 intents.members = True
@@ -23,7 +18,7 @@ client = commands.Bot(command_prefix=prefix, intents=intents, help_command=None,
 # useful code
 @client.event
 async def on_ready():
-    await client.change_presence(activity=nextcord.Activity(type=nextcord.ActivityType.watching, name="This Server"))
+    await client.change_presence(activity=nextcord.Activity(type=nextcord.ActivityType.watching, name="/help"))
     print("The Bot Is Up And Running")
     print("-------------------------")
 
