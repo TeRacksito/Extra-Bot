@@ -15,9 +15,12 @@ class Help(commands.Cog):
     async def help(self, interaction: nextcord.Interaction):
         embed = nextcord.Embed(
             title="Commands",
-            color=embedColor,
-            description=f"-Help - Display This Message \n-Ban [Member] [Reason] - Ban A Spesific Member From The Server \n-Kick [Member] [Reason] - Kick A Spesific Member\n-YtSearch [Query] - Search On Youtube For Query \n-GSearch [Query] - Search On Google For Query \n-Myid - Tell You Your Id \n-YesOrNo [Question] - Ask The Bot A Question \n-CheckMcName [Name] - Check If A Minecraft Name Is Availbe Or Not \n-GetId [Member] - Get The Id Of A Member And Send It\n-Play [Song Url] - Play The Song From The Youtube Url\n-Stop - Stop The Song That's Currently Playing"
+            color=embedColor
         )
+        embed.add_field(name="Music", value="-play [url] - Plays the audio from the spicified url\n-stop - Stops the currently playing audio")
+        embed.add_field(name="Moderation",value="/kick [member] - Kicks the specified member\n/ban - Bans the specified member")
+        embed.add_field(name="Misc", value="/ytsearch [Query] - Search Youtube For Something\n/gsearch [Query] - Search Google For Something\n/myid - Sends You Your Discord ID\n/getid [member] - Get Some Data About a Spicific member\n/checkmcname [name] - Checks If A Minecraft Name Is Availbe\n/help - Display This Message")
+        embed.add_field(name="Fun", value="/yesorno [Question] - Ask the bot a question")
         await interaction.response.defer()
         await interaction.followup.send(embed=embed)
 
