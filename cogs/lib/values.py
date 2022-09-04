@@ -3,9 +3,8 @@ class values():
         guild1_id=1009880989318791289
         guild2_id=850066291225133068
         guilds=[guild1_id, guild2_id]
-        tokenInConfig=False #Set This To TRUE IF you want to make the token in the config file 
-        token=0
         welcome_channel = 1009880989796933754
+        server_name = "Testing Server"
         embedColor=0x2852fa
         prefix="-"
 
@@ -18,3 +17,5 @@ class values():
             return prefix
         elif value.lower() == "wlc_chnl":
             return welcome_channel
+        elif value.lower() == "guild_name":
+            return server_name
