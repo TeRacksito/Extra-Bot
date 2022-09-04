@@ -5,6 +5,7 @@ class values():
         guilds=[guild1_id, guild2_id]
         tokenInConfig=False #Set This To TRUE IF you want to make the token in the config file 
         token=0
+        welcome_channel = 1009880989796933754
         embedColor=0x2852fa
         prefix="-"
 
@@ -15,3 +16,5 @@ class values():
             return embedColor
         elif value.lower() == "prefix":
             return prefix
+        elif value.lower() == "wlc_chnl":
+            return welcome_channel
