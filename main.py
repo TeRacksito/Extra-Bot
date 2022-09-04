@@ -12,6 +12,8 @@ token = os.getenv('BOTTOKEN')
 intents = nextcord.Intents.default()
 intents.members = True
 intents.message_content = True
+intents.typing = False
+intents.presences = False
 client = commands.Bot(command_prefix=prefix, intents=intents, help_command=None, case_insensitive=True)
 
 
