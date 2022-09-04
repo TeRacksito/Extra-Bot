@@ -15,8 +15,8 @@
 	// 	],
 	// 	"description": "Log output to console"
 	// }
-	"A command Template": {
-		"prefix": "cmd_template",
+	"Command Template": {
+		"prefix": "cmd_temp",
 		"body": [
 		  "import nextcord, sys",
 		  "from nextcord.ext import commands",
@@ -25,22 +25,52 @@
 		  "",
 		  "guilds=v.values.getData(\"guilds\")",
 		  "embedColor=v.values.getData(\"color\")",
+		  "channel=v.values.getData(\"wlc_chnl\")",
 		  "",
 		  "class command(commands.Cog):",
 		  "    def __init__(self, client):",
 		  "        self.client = client",
 		  "",
-		  "    # Google Search Command",
+		  "    #Command",
 		  "    @nextcord.slash_command(guild_ids=guilds, description=\"Google Search Command\")",
-		  "    async def command(self, interaction:nextcord.Interaction):",
-		  "        interaction.response.defer()",
-		  "        interaction.followup.send(\"Command\")",
+		  "    async def command(self, interaction:nextcord.Interaction, query: str = ne",
+		  "        await interaction.response.defer()",
+		  "        await interaction.followup.send(\"command\")",
 		  "",
 		  "# Setup",
 		  "def setup(client):",
 		  "    client.add_cog(command(client))",
 		  ""
 		],
-		"description": "A command Template"
+		"description": "Command Template"
+	  },
+
+	  "Event Template": {
+		"prefix": "event_temp",
+		"body": [
+		  "import nextcord, sys",
+		  "from nextcord.ext import commands",
+		  "sys.path.insert(1, 'cogs\\lib')",
+		  "import values as v",
+		  "",
+		  "guilds=v.values.getData(\"guilds\")",
+		  "embedColor=v.values.getData(\"color\")",
+		  "channel=v.values.getData(\"wlc_chnl\")",
+		  "",
+		  "class command(commands.Cog):",
+		  "    def __init__(self, client):",
+		  "        self.client = client",
+		  "",
+		  "    #Command",
+		  "    @commands.Cog.listener()",
+		  "    async def on_ready(self)",
+		  "        print(\"I am ready\")",
+		  "",
+		  "# Setup",
+		  "def setup(client):",
+		  "    client.add_cog(command(client))",
+		  ""
+		],
+		"description": "Event Template"
 	  }
 }
