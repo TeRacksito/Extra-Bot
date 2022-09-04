@@ -56,6 +56,7 @@
 		  "guilds=v.values.getData(\"guilds\")",
 		  "embedColor=v.values.getData(\"color\")",
 		  "channel=v.values.getData(\"wlc_chnl\")",
+		  "server_name=v.values.getData(\"guild_name\")",
 		  "",
 		  "class command(commands.Cog):",
 		  "    def __init__(self, client):",
