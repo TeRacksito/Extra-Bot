@@ -33,7 +33,7 @@
 		  "",
 		  "    #Command",
 		  "    @nextcord.slash_command(guild_ids=guilds, description=\"Google Search Command\")",
-		  "    async def command(self, interaction:nextcord.Interaction, query: str = ne",
+		  "    async def command(self, interaction:nextcord.Interaction):",
 		  "        await interaction.response.defer()",
 		  "        await interaction.followup.send(\"command\")",
 		  "",
