@@ -1,3 +1,4 @@
 nextcord
 nextcord[voice,speed]
 youtube_dl
+mojang
