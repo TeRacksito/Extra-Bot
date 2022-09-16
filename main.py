@@ -1,7 +1,8 @@
 import nextcord
-import os
+import os, sys
 from nextcord.ext import commands
-import lib.values as v
+sys.path.insert(1, 'cogs/lib')
+import values as v
 
 prefix=v.values.getData("prefix")
 configData=v.values.getData("tokendetails")

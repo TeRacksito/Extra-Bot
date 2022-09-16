@@ -1,7 +1,8 @@
 from nextcord import Interaction
-import nextcord
+import nextcord, sys
 from nextcord.ext import commands
-import lib.values as v
+sys.path.insert(1, 'cogs\lib')
+import values as v
 
 guilds=v.values.getData("guilds")
 embedColor=v.values.getData("color")
