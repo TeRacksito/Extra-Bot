@@ -10,6 +10,7 @@ configData=v.values.getData("tokendetails")
 tokenFile = open("token.txt","r")
 token = tokenFile
 
+
 intents = nextcord.Intents.default()
 intents.members = True
 intents.message_content = True
