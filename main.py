@@ -7,7 +7,8 @@ import values as v
 prefix=v.values.getData("prefix")
 configData=v.values.getData("tokendetails")
 
-token = os.getenv('BOTTOKEN')
+tokenFile = open("token.txt","r")
+token = tokenFile
 
 intents = nextcord.Intents.default()
 intents.members = True
