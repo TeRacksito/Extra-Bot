@@ -4,9 +4,9 @@
 An open-source Discord bot made in Python and the Nextcord library
 
 ## Table Of Contents (If you dont want to use the scrolling wheel)
-- [Top Features](https://github.com/ahmed3457/extra-bot/tree/main#run-locally)
-- [Running Locally](https://github.com/ahmed3457/extra-bot/tree/main#run-locally)
-- [Contributing](https://github.com/ahmed3457/extra-bot/tree/main#run-locally)
+- [Top Features](https://github.com/ahmed3457/extra-bot/tree/stable#run-locally)
+- [Running Locally](https://github.com/ahmed3457/extra-bot/tree/stable#run-locally)
+- [Contributing](https://github.com/ahmed3457/extra-bot/tree/stable#run-locally)
 
 ## Top Features
 
