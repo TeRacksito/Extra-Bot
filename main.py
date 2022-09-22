@@ -7,8 +7,7 @@ import values as v
 prefix=v.values.getData("prefix")
 configData=v.values.getData("tokendetails")
 
-tokenFile = open("token.txt","r")
-token = str(tokenFile)
+token = v.values.getData("token")
 
 
 intents = nextcord.Intents.default()

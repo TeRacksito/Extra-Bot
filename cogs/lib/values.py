@@ -1,4 +1,7 @@
 #Very Baisic Api
+import os
+
+
 class values():
     def getData(value):
         guild1_id=1009880989318791289
@@ -12,6 +15,8 @@ class values():
         embedColor=0x2852fa
         prefix="-"
 
+        token = os.getenv("BOTTOKEN")
+
         if value.lower() == "guilds":
             return guilds
         elif value.lower() == "color":
@@ -24,3 +29,5 @@ class values():
             return server_name
         elif value.lower() == "wlc_message":
             return welcome_message
+        elif value.lower() == "token":
+            return token
