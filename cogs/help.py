@@ -5,6 +5,7 @@ import values as v
 
 guilds=v.values.getData("guilds")
 embedColor=v.values.getData("color")
+prefix=v.values.getData("prefix")
 
 class Help(commands.Cog):
     def __init__(self, client):
@@ -13,16 +14,8 @@ class Help(commands.Cog):
     # Help command
     @nextcord.slash_command(guild_ids=guilds, description="Help Command")
     async def help(self, interaction: nextcord.Interaction):
-        embed = nextcord.Embed(
-            title="Commands",
-            color=embedColor
-        )
-        embed.add_field(name="Music", value="-play [url] - Plays the audio from the spicified url\n-stop - Stops the currently playing audio")
-        embed.add_field(name="Moderation",value="/kick [member] - Kicks the specified member\n/ban - Bans the specified member")
-        embed.add_field(name="Misc", value="/ytsearch [Query] - Search Youtube For Something\n/gsearch [Query] - Search Google For Something\n/myid - Sends You Your Discord ID\n/getid [member] - Get Some Data About a Spicific member\n/checkmcname [name] - Checks If A Minecraft Name Is Availbe\n/help - Display This Message")
-        embed.add_field(name="Fun", value="/yesorno [Question] - Ask the bot a question")
         await interaction.response.defer()
-        await interaction.followup.send(embed=embed)
+        await interaction.followup.send(f"```Category:\n     Moderation:\n          /kick [member] - Kicks the specified member \n          /ban - Bans the specified member \n     Misc:\n          /myid - Send You Your Discord ID\n          /getid [member] - Get Some Data About the specified member\n          /help - Display this message\n          /yesorno [question] - Ask the bot a question\n     Minecraft:\n          /checkmcname [name] - Checks wether a minecraft name is availble or not               \n/mcprofile [player] - Check the specified minecraft profile (Currently only the getting skin functionality work)\n     Music:\n          {prefix}play [url] - plays the audio of the video youtube of the specified url\n          {prefix}stop - stops the audio playing in the current channel```")
 
 
 # setup
