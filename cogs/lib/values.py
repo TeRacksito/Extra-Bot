@@ -7,7 +7,6 @@ class values():
         guild1_id=1009880989318791289
         guild2_id=850066291225133068
         guilds=[guild1_id, guild2_id]
-
         welcome_channel = 1009880989796933754
         welcome_message = "WELCOME TO OUR TESTING SERVER THIS SERVER WAS MADE FOR TESTING THE BOT"
         server_name = "Testing Server"
