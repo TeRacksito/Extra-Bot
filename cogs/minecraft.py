@@ -30,7 +30,19 @@ class Minecraft(commands.Cog):
             McEmbed = nextcord.Embed(title=name, description=f"The Minecraft Name {name} Is Unvailbe", color=embedColor)
             await interaction.response.defer()
             await interaction.followup.send(embed=McEmbed)
-        
+
+    @nextcord.slash_command(guild_ids=guilds, description="View the profile of the specified minecraft player")
+    async def mcprofile(self, interaction: nextcord.Interaction, name: str = nextcord.SlashOption(description="The minecraft player you want to see his profile")):
+        player = MojangAPI.get_uuid(name)
+
+        if not player:
+            await interaction.response.defer()
+            await interaction.followup.send("This minecraft player doesn't exist")
+        else:
+            profile=MojangAPI.get_profile(player)
+            McEmbed = nextcord.Embed(color=embedColor, description="Click the title to get the player's skin", title=name, url=profile.skin_url)
+            await interaction.response.defer()
+            await interaction.followup.send(embed=McEmbed)
 
 # Setup
 def setup(client):
