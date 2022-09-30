@@ -36,7 +36,7 @@
 		"description": "A template For a new event"
 	  },
 	  "A template For a new Cog": {
-		"prefix": "event_template",
+		"prefix": "cog_template",
 		"body": [
 		  "import nextcord, sys",
 		  "from nextcord.ext import commands",
