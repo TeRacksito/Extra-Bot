@@ -15,63 +15,41 @@
 	// 	],
 	// 	"description": "Log output to console"
 	// }
-	"Command Template": {
-		"prefix": "cmd_temp",
+	"A template For a new command": {
+		"prefix": "cmd_template",
 		"body": [
-		  "import nextcord, sys",
-		  "from nextcord.ext import commands",
-		  "sys.path.insert(1, 'cogs\\lib')",
-		  "import values as v",
-		  "",
-		  "guilds=v.values.getData(\"guilds\")",
-		  "embedColor=v.values.getData(\"color\")",
-		  "channel=v.values.getData(\"wlc_chnl\")",
-		  "",
-		  "class command(commands.Cog):",
-		  "    def __init__(self, client):",
-		  "        self.client = client",
-		  "",
-		  "    #Command",
-		  "    @nextcord.slash_command(guild_ids=guilds, description=\"Google Search Command\")",
-		  "    async def command(self, interaction:nextcord.Interaction):",
+		  "@nextcord.slash_command(guild_ids=guilds, description=\"A Command\")",
+		  "    async def help(self, interaction: nextcord.Interaction):",
 		  "        await interaction.response.defer()",
-		  "        await interaction.followup.send(\"command\")",
-		  "",
-		  "# Setup",
-		  "def setup(client):",
-		  "    client.add_cog(command(client))",
-		  ""
+		  "        await interaction.followup.send(\"A Command\")"
 		],
-		"description": "Command Template"
+		"description": "A template For a new command"
 	  },
 
-	  "Event Template": {
-		"prefix": "event_temp",
+	  "A template For a new event": {
+		"prefix": "event_template",
+		"body": [
+		  "@commands.Cog.listener()",
+		  "    async def on_member_join(self, member):",
+		  "         print(\"Great!\")"
+		],
+		"description": "A template For a new event"
+	  },
+	  "A template For a new Cog": {
+		"prefix": "event_template",
 		"body": [
 		  "import nextcord, sys",
 		  "from nextcord.ext import commands",
 		  "sys.path.insert(1, 'cogs\\lib')",
 		  "import values as v",
 		  "",
-		  "guilds=v.values.getData(\"guilds\")",
-		  "embedColor=v.values.getData(\"color\")",
-		  "channel=v.values.getData(\"wlc_chnl\")",
-		  "server_name=v.values.getData(\"guild_name\")",
-		  "",
-		  "class command(commands.Cog):",
+		  "class Cog(commands.Cog):",
 		  "    def __init__(self, client):",
 		  "        self.client = client",
-		  "",
-		  "    #Command",
-		  "    @commands.Cog.listener()",
-		  "    async def on_ready(self)",
-		  "        print(\"I am ready\")",
-		  "",
 		  "# Setup",
 		  "def setup(client):",
-		  "    client.add_cog(command(client))",
-		  ""
+		  "    client.add_cog(Welcome(client))"
 		],
-		"description": "Event Template"
+		"description": "A template For a new Cog"
 	  }
 }
