@@ -42,6 +42,15 @@ pip install -r requirements.txt
 pip3 install -r requirements.txt
 ```
 
+Config the bot
+```
+#windows
+config.bat
+#Linux 
+#Just use nano by executing the following command, I am assuming that you know what you are doing if you are using linux
+nano cogs/lib/values.py
+```
+
 Start the server
 
 ```bash
