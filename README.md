@@ -2,6 +2,7 @@
 # Extra Bot 
 
 An open-source Discord bot made in Python and the Nextcord library
+For the changelog (By date) check changelog.md or click [here](https://github.com/Ahmed3457/Extra-Bot/blob/stable/changelog.md#table-of-content)
 
 ## Table Of Contents (If you dont want to use the scrolling wheel)
 - [Top Features](https://github.com/ahmed3457/extra-bot/tree/stable#run-locally)
@@ -14,7 +15,7 @@ An open-source Discord bot made in Python and the Nextcord library
 - A Kick Comand
 - Music Commands 🎧
 - Compatible With Linux 🐧
-- A Config File (cogs/lib/values.py) ⚙️
+- A Config File ([values.py](cogs/lib/values.py)) ⚙️
 - And more ✨
 
 ### Note: for a full list of Commands execute /help
