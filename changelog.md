@@ -13,3 +13,4 @@
 ### 6th
 - Added /random_number command
 - Removed an unecessary line of code in [cogs/clear.py](cogs/clear.py)
+- Added the [logos](logos) folder which contains logos for the bot
