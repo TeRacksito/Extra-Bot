@@ -5,7 +5,6 @@ import values as v
 import time
 
 guilds=v.values.getData("guilds")
-print(guilds)
 embedColor=v.values.getData("color")
 
 class Clear(commands.Cog):
