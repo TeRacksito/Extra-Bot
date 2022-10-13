@@ -9,6 +9,11 @@
 - Added /random_number command
 - Removed an unecessary line of code in [cogs/clear.py](cogs/clear.py)
 - Added the [logos](logos) folder which contains logos for the bot
+### 13th
+- Added /add command
+- Added /subtract command 
+- Added /divide command
+- Added /multiply command
 ## September 2022
 ### 30th 
 - Added a clear command 
