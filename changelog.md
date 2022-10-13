@@ -1,6 +1,7 @@
-# Table of content
+# Table of contents
 * [2022.10](https://github.com/Ahmed3457/Extra-Bot/blob/stable/changelog.md#october-2022)
     * [6th](https://github.com/Ahmed3457/Extra-Bot/blob/stable/changelog.md#6th)
+    * [13th](https://github.com/Ahmed3457/Extra-Bot/edit/stable/changelog.md#13th)
 * [2022.9](https://github.com/Ahmed3457/Extra-Bot/blob/stable/changelog.md#september-2022)
     * [30th](https://github.com/Ahmed3457/Extra-Bot/blob/stable/changelog.md#30th)
 
