@@ -15,6 +15,7 @@
 - Added /subtract command 
 - Added /divide command
 - Added /multiply command
+- Added /flipcoin command
 ## September 2022
 ### 30th 
 - Added a clear command 
