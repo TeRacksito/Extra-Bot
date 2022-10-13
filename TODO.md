@@ -1,9 +1,9 @@
-Add /subtract command (undone)
+~~Add /subtract command~~
 
-Add /add command (undone)
+~~Add /add command~~
 
-Add /multiply command (undone)
+~~Add /multiply command~~
 
-Add /divide command (undone)
+~~Add /divide command~~
 
-Setup docs for the bot (helpful [link](https://squidfunk.github.io/mkdocs-material/getting-started/)) (undone)
+~~Setup docs for the bot (helpful [link](https://squidfunk.github.io/mkdocs-material/getting-started/))~~(never mind)
