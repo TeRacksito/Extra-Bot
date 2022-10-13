@@ -25,6 +25,20 @@ class Cog(commands.Cog):
                 await interaction.response.defer()
                 await interaction.followup.send(f"The provided parameters '{a}' and '{b}' are NOT numbers! \nPlease provide a number to continue")
 
+    @nextcord.slash_command(guild_ids=guilds, description="Adds 2 numbers")
+    async def add(self, interaction: nextcord.Interaction, number_1: str = nextcord.SlashOption(required=True), number_2: str = nextcord.SlashOption(required=True)):
+            try:
+                num1 = int(number_1)
+                num2 = int(number_2)
+                sum = num1 + num2
+
+                await interaction.response.defer()
+                await interaction.followup.send(f"{num1} + {num2} is {sum}")
+            except ValueError:
+                await interaction.response.defer()
+                await interaction.followup.send(f"The provided parameters '{number_1}' and '{number_2}' are NOT numbers! \nPlease provide a number to continue")
+
+
 # Setup
 def setup(client):
     client.add_cog(Cog(client))
