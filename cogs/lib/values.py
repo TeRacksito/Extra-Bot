@@ -1,20 +1,24 @@
 #Very Baisic Api
 import os
 
+import youtube_dl
+
 
 class values():
     def getData(value):
         guild1_id=1009880989318791289
         guild2_id=850066291225133068
-        guilds=[guild1_id, guild2_id]
-        welcome_channel = 1009880989796933754
-        welcome_message = "WELCOME TO OUR TESTING SERVER THIS SERVER WAS MADE FOR TESTING THE BOT"
-        server_name = "Testing Server"
+        guild3_id=977477205573652518
+        guilds=[guild1_id, guild2_id,guild3_id]
+        welcome_channel = 977477205573652521
+        server_name = f"Extra Bot Discord Server"
+        welcome_message = f"Welcome This is {server_name} which was made for stuff about the extra bot"
 
         embedColor=0x2852fa
         prefix="-"
 
         token = os.getenv("BOTTOKEN")
+        youtube_api_key = os.getenv("YTTOKEN")
 
         if value.lower() == "guilds":
             return guilds
@@ -30,3 +34,5 @@ class values():
             return welcome_message
         elif value.lower() == "token":
             return token
+        elif value.lower() == "yt_api_key":
+            return youtube_api_key
