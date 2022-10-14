@@ -13,6 +13,7 @@
 - Converted the music commands to slash commands
 - Improved the music commands 
 - Added a development branch
+- Improved the help command
 ### 13th
 - Added /add command
 - Added /subtract command 
