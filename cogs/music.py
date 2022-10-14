@@ -8,6 +8,8 @@ import values as v
 from nextcord.ext import commands
 
 guilds = v.values.getData("guilds")
+embedColor = v.values.getData("color")
+
 class Music(commands.Cog):
     @nextcord.slash_command(guild_ids=guilds, description="Looks for the specified query on youtube and plays the most relevant result audio")
     async def play(self, interaction: nextcord.Interaction, qeury: str = nextcord.SlashOption(required=True)):
@@ -27,7 +29,16 @@ class Music(commands.Cog):
             song = data['url']
             player = nextcord.FFmpegPCMAudio(song, **ffmpeg_options)
             vc_client1.play(player)
-            await interaction.followup.send(f"Now Playing The Requested Song By <@{interaction.user.id}>")
+
+            vidData = YoutubeLib.GetVideoData(Qeury=qeury)
+            vidTitle = vidData[1]
+            vidThumbUrl = vidData[0]
+            vidMaker = vidData[2]
+
+            ytDataEmbed = nextcord.Embed(title=vidTitle, description=vidMaker, url=url, color=embedColor)
+            ytDataEmbed.set_thumbnail(vidThumbUrl)
+        
+            await interaction.followup.send(f"Now Playing The Requested Song By <@{interaction.user.id}>", embed=ytDataEmbed)
 
         else:
             await interaction.response.defer()
