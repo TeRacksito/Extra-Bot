@@ -48,7 +48,7 @@ class Help(commands.Cog):
         ```
         """
         await interaction.response.defer()
-        await interaction.followup.send(f"")
+        await interaction.followup.send(help_text)
 
 
 # setup
