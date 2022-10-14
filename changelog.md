@@ -6,16 +6,17 @@
     * [30th](https://github.com/Ahmed3457/Extra-Bot/blob/stable/changelog.md#30th)
 
 ## October 2022
-### 6th
-- Added /random_number command
-- Removed an unecessary line of code in [cogs/clear.py](cogs/clear.py)
-- Added the [logos](logos) folder which contains logos for the bot
 ### 13th
 - Added /add command
 - Added /subtract command 
 - Added /divide command
 - Added /multiply command
 - Added /flipcoin command
+- Improved the music command
+### 6th
+- Added /random_number command
+- Removed an unecessary line of code in [cogs/clear.py](cogs/clear.py)
+- Added the [logos](logos) folder which contains logos for the bot
 ## September 2022
 ### 30th 
 - Added a clear command 
