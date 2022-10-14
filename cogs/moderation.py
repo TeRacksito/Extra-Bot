@@ -15,9 +15,9 @@ class Moderation(commands.Cog):
     @nextcord.slash_command(guild_ids=guilds, description="Kick The Specified Member")
     @has_permissions(kick_members=True)
     async def kick(self, interaction: nextcord.Interaction, member: nextcord.Member, *, reason: str = nextcord.SlashOption(description="The Reason You Want To Kick The Member", required=True)):
+        await interaction.response.defer() 
         await member.send(f"You Got Kick From The Server \nReason:{reason}")
         await member.kick(reason=reason)
-        await interaction.response.defer()
         await interaction.followup.send(f"Kicked {member}\nReason:{reason}")
 
     # Exeption in case if the member doen't have the permissions
@@ -29,9 +29,9 @@ class Moderation(commands.Cog):
     @nextcord.slash_command(guild_ids=guilds, description="Ban Sepcified Member")
     @has_permissions(ban_members=True)
     async def ban(self, interaction: nextcord.Interaction, member: nextcord.Member, *, reason: str = nextcord.SlashOption(description="The Reason You Want To Ban The Member", required=True)):
+        await interaction.response.defer()
         await member.send(f"You Got Ban From The Server \nReason:{reason}")
         await member.ban(reason=reason)
-        await interaction.response.defer()
         await interaction.followup.send(f"Banned {member}\nReason:{reason}")
 
     @ban.error
