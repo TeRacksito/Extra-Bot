@@ -1,3 +1,4 @@
+import time
 import nextcord
 import os, sys
 from nextcord.ext import commands
@@ -24,6 +25,9 @@ async def on_ready():
     await client.change_presence(activity=nextcord.Activity(type=nextcord.ActivityType.watching, name="/help"))
     print("---------------------------------------------------------------")
     print("___________         __                  __________        __   \n\_   _____/__  ____/  |_____________    \______   \ _____/  |_ \n |    __)_\  \/  /\   __\_  __ \__  \    |    |  _//  _ \   __|\n |        \>    <  |  |  |  | \// __ \_  |    |   (  <_> )  |  \n/_______  /__/\_ \ |__|  |__|  (____  /  |______  /\____/|__|  \n        \/      \/                  \/          \/             ")
+    print("---------------------------------------------------------------")
+    print(f"The client's latency is {round(client.latency * 1000)} ms")
+    print("Logged in as " + str(client.user))
     print("---------------------------------------------------------------")
 
 
