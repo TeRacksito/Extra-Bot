@@ -1,9 +1,9 @@
 import nextcord, sys
 from nextcord.ext import commands
-from values import values
 
 sys.path.insert(1, "cogs\lib")
 
+from values import values
 
 guilds = values.getData("guilds")
 embedColor = values.getData("color")
