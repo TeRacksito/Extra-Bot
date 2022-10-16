@@ -13,6 +13,7 @@
 - Fixed a problem with the yes or no command
 - Fixed a problem with the help command
 - Added a /again command
+- Added a /ping command
 ### 14th
 - Improved the bot's youtube library
 - Fixed problems with the /kick and /ban commands 
