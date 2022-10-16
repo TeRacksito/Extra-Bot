@@ -13,7 +13,7 @@ class ping(commands.Cog):
     @nextcord.slash_command(guild_ids=guilds, description="A Command")
     async def ping(self, interaction: nextcord.Interaction):
             await interaction.response.defer()
-            dataEmbed = nextcord.Embed(title="Pong!", description=f"The bot's ping is {round(self.bot.latency * 1000)}ms", color=embedColor)
+            dataEmbed = nextcord.Embed(title="Pong!", description=f"The bot's ping is {round(self.client.latency * 1000)}ms", color=embedColor)
             await interaction.followup.send(embed=dataEmbed)
 # Setup
 def setup(client):
