@@ -11,6 +11,7 @@
 ### 16th
 - Fixed a problem with the welcoming system
 - Fixed a problem with the yes or no command
+- Fixed a problem with the help command
 ### 14th
 - Improved the bot's youtube library
 - Fixed problems with the /kick and /ban commands 
