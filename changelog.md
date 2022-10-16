@@ -12,6 +12,7 @@
 - Fixed a problem with the welcoming system
 - Fixed a problem with the yes or no command
 - Fixed a problem with the help command
+- Added a /again command
 ### 14th
 - Improved the bot's youtube library
 - Fixed problems with the /kick and /ban commands 
