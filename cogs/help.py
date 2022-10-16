@@ -16,35 +16,35 @@ class Help(commands.Cog):
     async def help(self, interaction: nextcord.Interaction):
         help_text = """
         ```
-        Category:      
-            Moderation:           
-                /kick [member] - Kicks the specified member            
-                /ban - Bans the specified member
+Category:      
+    Moderation:           
+        /kick [member] - Kicks the specified member            
+        /ban - Bans the specified member
                        
-            Misc:           
-                /myid - Send You Your Discord ID           
-                /getid [member] - Get Some Data About the specified member           
-                /help - Display this message           
-                /clear [Number] - clears the specified number of messages           
-                /yesorno [question] - Ask the bot a question      
+    Misc:           
+        /myid - Send You Your Discord ID           
+        /getid [member] - Get Some Data About the specified member           
+        /help - Display this message           
+        /clear [Number] - clears the specified number of messages           
+        /yesorno [question] - Ask the bot a question      
 
-            Minecraft:           
-                /checkmcname [name] - Checks wether a minecraft name is availble or not                
-                /mcprofile [player] - Check the specified minecraft profile (Currently only the getting skin functionality work)      
+    Minecraft:           
+        /checkmcname [name] - Checks if a minecraft name is availble or not                
+        /mcprofile [player] - Check the specified minecraft profile 
 
-            Music:           
-                {prefix}play [query] - Searches for the query on youtube and plays the audio of it in the current voice channel          
-                {prefix}stop - stops the audio playing in the current channel
+    Music:           
+        /play [query] - Start playing music     
+        /stop - stops the audio playing in the current channel
 
-            Math:
-                /add [Number 1] [Number 2] - Adds 2 numbers in case that you are too lazy to use your braiimage.png
-                /subtract [Number 1] [Number 2] - Subtracts 2 numbers in case that you are too lazy to use your brain
-                /divide [Number 1] [Number 2] - Divides 2 numbers in case that you are too lazy to use your brain
-                /multiply [Number 1] [Number 2] - Multiplies 2 numbers in case that you are too lazy to use your brain
+    Math:
+        /add [Number 1] [Number 2] - Adds 2 numbers
+        /subtract [Number 1] [Number 2] - Subtracts 2 numbers
+        /divide [Number 1] [Number 2] - Divides 2 numbers
+        /multiply [Number 1] [Number 2] - Multiplies 2 numbers
 
-            Randomisation:
-                /flipcoin - flips a coin, self-explanatory
-                /randomnumber [a] [b] - Generates a random number between point a and b
+    Randomisation:
+        /flipcoin - flips a coin, self-explanatory
+        /randomnumber [a][b] - Generates a random number between point a and b
         ```
         """
         await interaction.response.defer()
