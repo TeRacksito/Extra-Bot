@@ -35,6 +35,7 @@ Category:
     Music:           
         /play [query] - Start playing music     
         /stop - stops the audio playing in the current channel
+        /again - plays the last played song globaly 
 
     Math:
         /add [Number 1] [Number 2] - Adds 2 numbers
