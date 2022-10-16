@@ -6,7 +6,7 @@ import values as v
 guilds=v.values.getData("guilds")
 embedColor=v.values.getData("color")
 
-class Cog(commands.Cog):
+class ping(commands.Cog):
     def __init__(self, client):
         self.client = client
 
@@ -17,4 +17,4 @@ class Cog(commands.Cog):
             await interaction.followup.send(embed=dataEmbed)
 # Setup
 def setup(client):
-    client.add_cog(Cog(client))
+    client.add_cog(ping(client))
