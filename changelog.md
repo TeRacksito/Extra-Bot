@@ -1,5 +1,6 @@
 # Table of contents
 * [2022.10](https://github.com/Ahmed3457/Extra-Bot/blob/stable/changelog.md#october-2022)
+    *[16th](https://github.com/Ahmed3457/Extra-Bot/edit/stable/changelog.md#16th)
     * [14th](https://github.com/Ahmed3457/Extra-Bot/edit/stable/changelog.md#14th)
     * [13th](https://github.com/Ahmed3457/Extra-Bot/edit/stable/changelog.md#13th)
     * [6th](https://github.com/Ahmed3457/Extra-Bot/blob/stable/changelog.md#6th)
@@ -7,6 +8,9 @@
     * [30th](https://github.com/Ahmed3457/Extra-Bot/blob/stable/changelog.md#30th)
 
 ## October 2022
+### 16th
+- Fixed a problem with the welcoming system
+- Fixed a problem with the yes or no command
 ### 14th
 - Improved the bot's youtube library
 - Fixed problems with the /kick and /ban commands 
