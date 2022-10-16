@@ -18,6 +18,8 @@ class GetID(commands.Cog):
             color=embedColor,
             description=f"The Id Of {member._user} is {member.id}")
         IdEmbed.set_thumbnail(member.avatar.url)
+        IdEmbed.add_field(name="Joined Discord on", value=member.created_at)
+        IdEmbed.add_field(name="Joined This Server on", value=member.joined_at)
         await interaction.response.defer()
         await interaction.followup.send(embed=IdEmbed)
         
