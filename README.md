@@ -47,7 +47,7 @@ pip3 install -r requirements.txt
 ```
 
 Config the bot
-```
+```bash
 #windows
 config.bat
 #Linux 
