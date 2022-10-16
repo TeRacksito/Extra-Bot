@@ -62,7 +62,7 @@ class Music(commands.Cog):
         else:
             await interaction.response.send_message("The Bot/You Is Not In A Voice Channel To Stop !")
 
-    @nextcord.slash_command(guild_ids=guilds, description="A Command")
+    @nextcord.slash_command(guild_ids=guilds, description="plays the last played song by the bot")
     async def again(self, interaction: nextcord.Interaction):
         yt_dl_options = {"format": "bestaudio/best"}
         ffmpeg_options = {"options": "-vn"}
