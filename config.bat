@@ -1,1 +1,1 @@
-notepad cogs/lib/values.py
+start config_windows/bot_config.exe
