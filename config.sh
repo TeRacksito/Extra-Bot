@@ -1,1 +1,1 @@
-nano cogs/lib/values.py
+config_linux/bot_config
