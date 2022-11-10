@@ -11,11 +11,6 @@ class values():
         guild3_id = 977477205573652518
         guilds = [guild1_id, guild2_id,guild3_id]
 
-        welcomeEnabledServerID = 977477205573652518
-        welcome_channelID = 977477205573652521
-        server_name = f"Extra Bot Discord Server"
-        welcome_message = f"Welcome This is {server_name} which was made for stuff about the extra bot"
-
         embedColor=0x2852fa
         prefix="-"
 
@@ -28,12 +23,8 @@ class values():
             "guilds": guilds,
             "color": embedColor,
             "prefix": prefix,
-            "wlc_chnl": welcome_channelID,
-            "guild_name": server_name,
-            "wlc_message": welcome_message,
             "token": token,
-            "yt_api_key": youtube_api_key,
-            "wlc_enabled_guild": welcomeEnabledServerID
+            "yt_api_key": youtube_api_key
         }
         
         return data.get(value.lower())
