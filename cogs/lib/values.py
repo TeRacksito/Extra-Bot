@@ -1,8 +1,7 @@
 #Very Basic Api
 import os
 import youtube_dl
-from configparser import ConfigParser
-
+import tomli
 
 class values():
     def getData(value):
@@ -14,8 +13,9 @@ class values():
         embedColor=0x2852fa
         prefix="-"
 
-        config = ConfigParser()
-        config.read("..\..\options.ini")
+        #Configuration system ???
+        with open("config.toml", mode = "rb") as fp:
+            config = tomli.load(fp)
         token = config["options"]["bot_token"]
         youtube_api_key = config["options"]["yt_api"]
         
