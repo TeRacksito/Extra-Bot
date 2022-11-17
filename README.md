@@ -2,28 +2,20 @@
 # Extra Bot 
 
 An open-source Discord bot made in Python and the Nextcord library
-For the changelog (By date) check changelog.md or click [here](https://github.com/Ahmed3457/Extra-Bot/blob/stable/changelog.md#table-of-content)
+For the changelog (By date) check changelog.md or click [here](changelog.md#table-of-content)
 
 ## Discord server
 for feature requests and updates Please consider joining my Discord server by clicking [here](https://discord.gg/DkNSE8PWjV)
 
 ## Table Of Contents (If you dont want to use the scrolling wheel)
-- [Top Features](https://github.com/ahmed3457/extra-bot/tree/stable#run-locally)
-- [Running Locally](https://github.com/ahmed3457/extra-bot/tree/stable#run-locally)
-- [Contributing](https://github.com/ahmed3457/extra-bot/tree/stable#run-locally)
-- [Feature requests](https://github.com/Ahmed3457/Extra-Bot/edit/stable/README.md#suggestions-and-feature-requests)
-## Top Features
-
-- A ban command
-- A Kick Comand
-- Music Commands 🎧
-- Compatible With Linux 🐧
-- A Config File ([values.py](cogs/lib/values.py)) ⚙️
-- And more ✨
+- [Top Features](README.md#run-locally)
+- [Running Locally](README.md#run-locally)
+- [Contributing](README.md#run-locally)
+- [Feature requests](README.md#suggestions-and-feature-requests)
 
 ### Note: for a full list of Commands execute /help
 
-## Run Locally
+## Run Locally 
 
 Clone the project
 
@@ -49,10 +41,10 @@ pip3 install -r requirements.txt
 Config the bot
 ```bash
 #windows
-config.bat
+notepad config.toml
 #Linux 
 #Just use nano by executing the following command, I am assuming that you know what you are doing if you are using linux
-nano cogs/lib/values.py
+nano config.toml
 ```
 
 Start the server
