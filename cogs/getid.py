@@ -11,7 +11,7 @@ class GetID(commands.Cog):
         self.client = client
 
     # Get ID Command Self Explanatory
-    @nextcord.slash_command(guild_ids=guilds, description="Get The Id Of A Specific Member")
+    @nextcord.slash_command(guild_ids=guilds, description="Get The Id Of A Specific Member", force_global = True)
     async def getid(self, interaction: nextcord.Interaction, member: nextcord.Member):
         IdEmbed = nextcord.Embed(
             title=f"{member._user}'s Id",

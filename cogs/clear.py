@@ -11,7 +11,7 @@ class Clear(commands.Cog):
     def __init__(self, client):
         self.client = client
         
-    @nextcord.slash_command(guild_ids=guilds, description="Clears a number of messages specified")
+    @nextcord.slash_command(guild_ids=guilds, description="Clears a number of messages specified", force_global = True)
     async def clear(self, interaction: nextcord.Interaction, number: int = nextcord.SlashOption(description="Number Of Messages You Want To Delete", required=True)):
             await interaction.channel.purge(limit=number, bulk=True)
             await interaction.response.defer()

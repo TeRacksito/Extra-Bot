@@ -11,7 +11,7 @@ class flipcoin(commands.Cog):
     def __init__(self, client):
         self.client = client
     
-    @nextcord.slash_command(guild_ids=guilds, description="Flips a coin")
+    @nextcord.slash_command(guild_ids=guilds, description="Flips a coin", force_global = True)
     async def flipcoin(self, interaction: nextcord.Interaction):
             choices = ["heads","tails"]
             random.shuffle(choices)
