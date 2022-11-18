@@ -28,15 +28,6 @@ Category:
         /clear [Number] - clears the specified number of messages           
         /yesorno [question] - Ask the bot a question      
 
-    Minecraft:           
-        /checkmcname [name] - Checks if a minecraft name is availble or not                
-        /mcprofile [player] - Check the specified minecraft profile 
-
-    Music:           
-        /play [query] - Start playing music     
-        /stop - stops the audio playing in the current channel
-        /again - plays the last played song globaly 
-
     Math:
         /add [Number 1] [Number 2] - Adds 2 numbers
         /subtract [Number 1] [Number 2] - Subtracts 2 numbers
