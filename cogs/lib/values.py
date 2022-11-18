@@ -18,6 +18,11 @@ class values():
             config = tomli.load(fp)
         token = config["options"]["bot_token"]
         youtube_api_key = config["options"]["yt_api"]
+
+        if not token:
+            token = config["options"]["bot_token_env"]
+        if not youtube_api_key:
+            youtube_api_key = config["options"]["yt_api_env"]
         
         data = {
             "guilds": guilds,
