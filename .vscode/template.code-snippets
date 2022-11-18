@@ -18,7 +18,7 @@
 	"A template For a new command": {
 		"prefix": "cmd_template",
 		"body": [
-		  "@nextcord.slash_command(guild_ids=guilds, description=\"A Command\")",
+		  "@nextcord.slash_command(guild_ids=guilds, description=\"A Command\", force_global = True)",
 		  "async def help(self, interaction: nextcord.Interaction):",
 		  "        await interaction.response.defer()",
 		  "        await interaction.followup.send(\"A Command\")"
