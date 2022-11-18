@@ -22,3 +22,7 @@ class YoutubeLib():
         packedData = (videoThumb, videoTitle, videoChannelName)
         
         return packedData
+    def GetChannelSubs(channel):
+        link = f"https://youtube.googleapis.com/youtube/v3/search?key={key}&q={Qeury}&type=video&part=snippet&maxResults=1"
+        ytData = requests.get(link).json()
+            

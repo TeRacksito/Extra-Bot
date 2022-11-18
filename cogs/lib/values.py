@@ -20,9 +20,11 @@ class values():
         youtube_api_key = config["options"]["yt_api"]
 
         if not token:
-            token = config["options"]["bot_token_env"]
+            tkn = config["options"]["bot_token_env"]
+            token = os.environ("tkn")
         if not youtube_api_key:
-            youtube_api_key = config["options"]["yt_api_env"]
+            yt = config["options"]["yt_api_env"]
+            youtube_api_key = os.environ("yt")
         
         data = {
             "guilds": guilds,
