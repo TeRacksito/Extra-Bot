@@ -1,12 +1,23 @@
 # Table of contents
-* [2022.10](https://github.com/Ahmed3457/Extra-Bot/blob/stable/changelog.md#october-2022)
-    *[16th](https://github.com/Ahmed3457/Extra-Bot/edit/stable/changelog.md#16th)
-    * [14th](https://github.com/Ahmed3457/Extra-Bot/edit/stable/changelog.md#14th)
-    * [13th](https://github.com/Ahmed3457/Extra-Bot/edit/stable/changelog.md#13th)
-    * [6th](https://github.com/Ahmed3457/Extra-Bot/blob/stable/changelog.md#6th)
-* [2022.9](https://github.com/Ahmed3457/Extra-Bot/blob/stable/changelog.md#september-2022)
-    * [30th](https://github.com/Ahmed3457/Extra-Bot/blob/stable/changelog.md#30th)
+* [2022.10](changelog.md#october-2022)
+    *[16th](changelog.md#16th)
+    * [14th](changelog.md#14th)
+    * [13th](changelog.md#13th)
+    * [6th](changelog.md#6th)
+* [2022.9](changelog.md#september-2022)
+    * [30th](changelog.md#30th)
+* [2022.11](changelog.md#november-2022)
+    * [17th](changelog.md#17th)
+    * [18th](changelog.md#17th)
 
+## November 2022
+### 18th
+- Made the commands Global
+- Added an option to get the keys from an envrionment variable
+### 17th
+- Remade the config system
+- Removed the minecraft commands due to problems with the minecraft api
+- Made a configuration library for future uses
 ## October 2022
 ### 16th
 - Fixed a problem with the welcoming system

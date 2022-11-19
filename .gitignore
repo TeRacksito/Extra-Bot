@@ -131,3 +131,4 @@ dmypy.json
 .pyre/ 
 #Token File
 token.txt/
+config.toml

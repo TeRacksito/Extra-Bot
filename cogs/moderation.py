@@ -12,7 +12,7 @@ class Moderation(commands.Cog):
         self.client = client
 
     # Kick command
-    @nextcord.slash_command(guild_ids=guilds, description="Kick The Specified Member")
+    @nextcord.slash_command(guild_ids=guilds, description="Kick The Specified Member", force_global = True)
     @has_permissions(kick_members=True)
     async def kick(self, interaction: nextcord.Interaction, member: nextcord.Member, *, reason: str = nextcord.SlashOption(description="The Reason You Want To Kick The Member", required=True)):
         await interaction.response.defer() 
@@ -26,7 +26,7 @@ class Moderation(commands.Cog):
         if isinstance(error, commands.MissingPermissions):
             await ctx.reply("You Don't Have The Permissions To Kick !")
 
-    @nextcord.slash_command(guild_ids=guilds, description="Ban Sepcified Member")
+    @nextcord.slash_command(guild_ids=guilds, description="Ban Sepcified Member", force_global = True)
     @has_permissions(ban_members=True)
     async def ban(self, interaction: nextcord.Interaction, member: nextcord.Member, *, reason: str = nextcord.SlashOption(description="The Reason You Want To Ban The Member", required=True)):
         await interaction.response.defer()

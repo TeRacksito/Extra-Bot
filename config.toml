@@ -1,0 +1,5 @@
+[options]
+bot_token = ""
+yt_api = ""
+bot_token_env = "BOTTOKEN"
+yt_api_env = "YTTOKEN"
