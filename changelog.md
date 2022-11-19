@@ -8,8 +8,12 @@
     * [30th](changelog.md#30th)
 * [2022.11](changelog.md#november-2022)
     * [17th](changelog.md#17th)
+    * [18th](changelog.md#17th)
 
 ## November 2022
+### 18th
+- Made the commands Global
+- Added an option to get the keys from an envrionment variable
 ### 17th
 - Remade the config system
 - Removed the minecraft commands due to problems with the minecraft api
