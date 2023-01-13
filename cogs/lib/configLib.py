@@ -31,6 +31,13 @@ class Config():
         
         welcome_status = data[f"server_{guild_id}"]["welcome_enabled"]
         return welcome_status
+    
+    def get_welcome_chan(self, guild_id):
+        with open("config/servers.json", "r") as conf:
+            data = json.load(conf)
+        
+        welcome_chan_id= data[f"server_{guild_id}"]["welcome_chan_id"]
+        return welcome_chan_id
 
 #Setter methods
     def set_welcome_status(self, guild_id, status):
@@ -45,7 +52,7 @@ class Config():
         with open("config/servers.json", "r") as conf:
             json.dump(data, conf)
 
-    def set_welcome_status(self, guild_id, channel):
+    def set_welcome_channel(self, guild_id, channel):
         data = {
             f"server_{guild_id}":{
                 "guild_id": guild_id,
