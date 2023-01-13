@@ -1,6 +1,6 @@
 # Table of contents
 * [2022.10](changelog.md#october-2022)
-    *[16th](changelog.md#16th)
+    * [16th](changelog.md#16th)
     * [14th](changelog.md#14th)
     * [13th](changelog.md#13th)
     * [6th](changelog.md#6th)
