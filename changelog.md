@@ -1,4 +1,9 @@
 # Table of contents
+* [2023.11](changelog.md#january-2023)
+    * [27th](changelog.md#27th)
+* [2022.11](changelog.md#november-2022)
+    * [17th](changelog.md#17th)
+    * [18th](changelog.md#17th)
 * [2022.10](changelog.md#october-2022)
     * [16th](changelog.md#16th)
     * [14th](changelog.md#14th)
@@ -6,10 +11,10 @@
     * [6th](changelog.md#6th)
 * [2022.9](changelog.md#september-2022)
     * [30th](changelog.md#30th)
-* [2022.11](changelog.md#november-2022)
-    * [17th](changelog.md#17th)
-    * [18th](changelog.md#17th)
-
+## January 2023
+## 27th
+- Added /meme command
+- Added automatic libraries install
 ## November 2022
 ### 18th
 - Made the commands Global
