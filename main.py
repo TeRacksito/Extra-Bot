@@ -1,6 +1,16 @@
 import time
-import nextcord
 import os, sys
+
+#Check for libraries an automatically install them
+try:
+    import nextcord
+    import requests
+except ModuleNotFoundError:
+    if sys.platform == "win32":
+        os.system("pip install -U nextcord requests")
+    if sys.platform in ["linux","linux2"]:
+        os.system("pip3 install -U nextcord requests")
+        
 from nextcord.ext import commands
 sys.path.insert(1, 'cogs/lib')
 import values as v
