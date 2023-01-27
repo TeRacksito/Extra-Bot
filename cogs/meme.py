@@ -17,6 +17,7 @@ class meme(commands.Cog):
             meme = gen_meme()
             meme_embed = nextcord.Embed(title="Here's a meme", color=embedColor)
             meme_embed.set_image(url = meme)
+            meme_embed.set_footer(text="Powered by meme api on Github ==> https://github.com/D3vd/Meme_Api", icon_url="https://cdn.discordapp.com/attachments/1027493896055439360/1068564499763830804/GitHub-Mark.png")
             await interaction.followup.send(embed=meme_embed)
         
 # Setup
