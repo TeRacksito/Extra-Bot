@@ -11,15 +11,15 @@ class GetID(commands.Cog):
         self.client = client
 
     # Get ID Command Self Explanatory
-    @nextcord.slash_command(guild_ids=guilds, description="Get The Id Of A Specific Member", force_global = True)
-    async def getid(self, interaction: nextcord.Interaction, member: nextcord.Member):
+    @nextcord.slash_command(guild_ids=guilds, description="Get The Id Of A Specific Member", force_global = True, dm_permission=True)
+    async def getpfp(self, interaction: nextcord.Interaction, user: nextcord.User):
         IdEmbed = nextcord.Embed(
-            title=f"{member._user}'s Id",
+            title=f"{user.name}'s Id",
             color=embedColor,
-            description=f"The Id Of {member._user} is {member.id}")
-        IdEmbed.set_thumbnail(member.avatar.url)
-        IdEmbed.add_field(name="Joined Discord on", value=member.created_at)
-        IdEmbed.add_field(name="Joined This Server on", value=member.joined_at)
+            description=f"The Id Of {user.name}{user.discriminator} is {user.id}")
+        IdEmbed.set_thumbnail(user.avatar.url)
+        IdEmbed.add_field(name="Joined Discord on", value=user.created_at)
+        IdEmbed.add_field(name="Avatar download link", value=f"[Click Here]({user.avatar.url})")
         await interaction.response.defer()
         await interaction.followup.send(embed=IdEmbed)
         

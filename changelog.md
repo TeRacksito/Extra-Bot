@@ -1,15 +1,26 @@
 # Table of contents
+* [2023.1](changelog.md#january-2023)
+    * [28th](changelog.md#28th)
+    * [27th](changelog.md#27th)
+* [2022.11](changelog.md#november-2022)
+    * [18th](changelog.md#18th)
+    * [17th](changelog.md#17th)
 * [2022.10](changelog.md#october-2022)
-    *[16th](changelog.md#16th)
+    * [16th](changelog.md#16th)
     * [14th](changelog.md#14th)
     * [13th](changelog.md#13th)
     * [6th](changelog.md#6th)
 * [2022.9](changelog.md#september-2022)
     * [30th](changelog.md#30th)
-* [2022.11](changelog.md#november-2022)
-    * [17th](changelog.md#17th)
-    * [18th](changelog.md#17th)
-
+## January 2023
+## 28th
+- Changed the name of the /getid command to /getpfp 
+- Made the /getpfp command dm compatible
+- Removed the /help command
+- Removed the -devportal command
+## 27th
+- Added /meme command
+- Added automatic libraries install
 ## November 2022
 ### 18th
 - Made the commands Global
