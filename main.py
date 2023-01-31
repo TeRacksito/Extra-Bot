@@ -7,9 +7,9 @@ try:
     import requests
 except ModuleNotFoundError:
     if sys.platform == "win32":
-        os.system("pip install -U nextcord requests")
+        os.system("pip install -r requirements.txt")
     if sys.platform in ["linux","linux2"]:
-        os.system("pip3 install -U nextcord requests")
+        os.system("pip3 install -r requirements.txt")
         
 from nextcord.ext import commands
 sys.path.insert(1, 'cogs/lib')
