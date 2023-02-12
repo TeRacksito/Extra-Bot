@@ -63,6 +63,8 @@ class Cog(commands.Cog):
             except ValueError:
                 await interaction.response.defer()
                 await interaction.followup.send(f"The provided parameters '{number_1}' and '{number_2}' are NOT numbers! \nPlease provide a number to continue")
+            except ZeroDivisionError:
+                await interaction.response.send_message("Cannot Divide by zero")
 
     @nextcord.slash_command(guild_ids=guilds, description="Multiplies 2 numbers if you are too lazy to use your brain", force_global = True)
     async def multiply(self, interaction: nextcord.Interaction, number_1: str = nextcord.SlashOption(required=True), number_2: str = nextcord.SlashOption(required=True)):
