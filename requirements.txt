@@ -1,3 +1,6 @@
 nextcord
 nextcord[voice,speed]
 requests
+quart
+quart-discord
+tomli
