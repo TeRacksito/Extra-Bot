@@ -3,7 +3,7 @@ import os
 import youtube_dl
 import tomli
 
-class values():
+class values():    
     def getData(value):
         guild1_id = 1009880989318791289
         guild2_id = 850066291225133068
