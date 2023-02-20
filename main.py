@@ -11,7 +11,7 @@ except ModuleNotFoundError:
     if sys.platform in ["linux","linux2"]:
         os.system("pip3 install -r requirements.txt")
         
-from nextcord.ext import commands
+from nextcord.ext import commands, ipc
 sys.path.insert(1, 'cogs/lib')
 import values as v
 
@@ -20,14 +20,23 @@ configData=v.values.getData("tokendetails")
 
 token = v.values.getData("token")
 
+class myCringeBot(commands.Bot):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        
+        self.ipc = ipc.Server(self, secret_key="my")
+    
+    async def on_ipc_ready(self):
+        print("ipc Ready")
+    async def on_ipc_error(self, endpoint, error):
+        print(endpoint, "raised", error)
 
 intents = nextcord.Intents.default()
 intents.members = True
 intents.message_content = True
 intents.typing = False
 intents.presences = False
-client = commands.Bot(command_prefix=prefix, intents=intents, help_command=None, case_insensitive=True)
-
+client = myCringeBot(command_prefix=prefix, intents=intents, help_command=None, case_insensitive=True)
 
 # useful code
 @client.event
@@ -53,3 +62,4 @@ if __name__ == "__main__":
         client.load_extension(extension)
 
 client.run(token)  # runs the bot
+client.ipc.start()
