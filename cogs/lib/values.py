@@ -22,9 +22,6 @@ class values():
         if not token:
             tkn = config["options"]["bot_token_env"]
             token = os.getenv("tkn")
-        if not youtube_api_key:
-            yt = config["options"]["yt_api_env"]
-            youtube_api_key = os.getenv("yt")
         
         data = {
             "guilds": guilds,
