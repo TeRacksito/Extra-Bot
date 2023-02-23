@@ -1,5 +1,6 @@
 # Table of contents
 * [2023.1](changelog.md#january-2023)
+    * [31th](changelog.md#31th)
     * [28th](changelog.md#28th)
     * [27th](changelog.md#27th)
 * [2022.11](changelog.md#november-2022)
@@ -13,6 +14,8 @@
 * [2022.9](changelog.md#september-2022)
     * [30th](changelog.md#30th)
 ## January 2023
+## 31th 
+- Improved the auto-lib fixing
 ## 28th
 - Changed the name of the /getid command to /getpfp 
 - Made the /getpfp command dm compatible
