@@ -19,12 +19,6 @@ class values():
         token = config["options"]["bot_token"]
         youtube_api_key = config["options"]["yt_api"]
 
-        with open("config.toml", mode="rb") as fp:
-            config = tomli.load(fp)
-        bot_id=config["options_dashboard"]["bot_id"]
-        client_id=config["options_dashboard"]["client_id"]
-        secret=config["options_dashboard"]["client_secret"]
-
         if not token:
             tkn = config["options"]["bot_token_env"]
             token = os.getenv("tkn")
@@ -37,10 +31,7 @@ class values():
             "color": embedColor,
             "prefix": prefix,
             "token": token,
-            "yt_api_key": youtube_api_key,
-            "bot_id": bot_id,
-            "client_id": client_id,
-            "secret": secret
+            "yt_api_key": youtube_api_key
         }
         
         return data.get(value.lower())

@@ -1,9 +1,5 @@
 [options]
 bot_token = ""
-yt_api = "b"
+yt_api = ""
 bot_token_env = "BOTTOKEN"
 yt_api_env = "YTTOKEN"
-[options_dashboard]
-bot_id = 
-client_id =
-client_secret = 
