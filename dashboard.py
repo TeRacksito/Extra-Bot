@@ -18,14 +18,14 @@ try:
     app.config["DISCORD_BOT_TOKEN"] = v.getData("token")
     dis = DiscordOAuth2Session(app)
     
-    @app.route("/test/")
+    @app.route("/test")
     async def test():
         return "test worked !"
-    @app.route("/login/")
+    @app.route("/login")
     async def login():
         return await dis.create_session()
     
-    @app.route("/callback/")
+    @app.route("/callback")
     async def callback():
         try:
             await dis.callback()
@@ -37,7 +37,7 @@ try:
     async def mainPage():
         return await render_template("index/index.html")
 
-    @app.route("/dash/")
+    @app.route("/dash")
     async def dash():
         user = await dis.fetch_user()
         return render_template("dash/dashboard.html", user=user)
@@ -48,4 +48,5 @@ except:
 
 if __name__ == "__main__":
     port=2010
-    app.run()
+    app.run(debug=True, port=port)
+    print(f"Dashboard started @ localhost:{port}")
