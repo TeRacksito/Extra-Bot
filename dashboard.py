@@ -1,6 +1,6 @@
 import os
 from quart import Quart, render_template, redirect, url_for
-from quart_discord import DiscordOAuth2Session, requires_authorization, Unauthorized
+from quart-discord import DiscordOAuth2Session, requires_authorization, Unauthorized
 from nextcord.ext import ipc
 import nextcord
 from cogs.lib.values import values
@@ -9,7 +9,7 @@ v=values()
 app = Quart(__name__)
 app.secret_key = "my"
 
-os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "true"
+os.environ("OAUTHLIB_INSECURE_TRANSPORT") = "true"
 
 try:
     app.config["DISCORD_CLIENT_ID"] = int(v.getData("client_id"))
@@ -18,9 +18,6 @@ try:
     app.config["DISCORD_BOT_TOKEN"] = v.getData("token")
     dis = DiscordOAuth2Session(app)
     
-    @app.route("/test")
-    async def test():
-        return "test worked !"
     @app.route("/login")
     async def login():
         return await dis.create_session()
