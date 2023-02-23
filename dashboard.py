@@ -13,10 +13,9 @@ os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "true"
 
 secret=values.getData("secret")
 app.config["DISCORD_CLIENT_SECRET"] = secret
-app.config["DISCORD_REDIRECT_URI"] = "https://ahmed3457-scaling-enigma-gwjj5rp5j753v5gw-5000.githubpreview.dev/callback"
+app.config["DISCORD_REDIRECT_URI"] = "http://127.0.0.1:5000/callback"
 app.config["DISCORD_CLIENT_ID"] = int(values.getData("client_id"))
 app.config["DISCORD_BOT_TOKEN"] = values.getData("token")
-ipc = ipc.Client(secret_key="my")
 dis = DiscordOAuth2Session(app)
 
 @app.route("/login")
@@ -28,10 +27,10 @@ async def login():
 async def mainPage():
     return await render_template("index/index.html")
 
-@app.route("/dashboard")
+@app.route("/dash")
 async def dash():
     user = await dis.fetch_user()
-    return await render_template("dash/dashboard.html", user=user)
+    return render_template("dash/dashboard.html", user=user)
 
 @app.route("/callback")
 async def callback():
@@ -39,8 +38,15 @@ async def callback():
         await dis.callback()
     except:
         return redirect(url_for("login"))
-    return redirect(url_for("dash"))
+    return redirect(url_for("dashboard"))
 
 if __name__ == "__main__":
-    port=5000
+    port=2010
     app.run(port=port, debug=True)
+# from quart import Quart
+# app = Quart(__name__)
+
+# @app.route("/")
+# def index():
+#     return "hey"
+# app.run(port=2010)
