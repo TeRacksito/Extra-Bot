@@ -1,6 +1,5 @@
 #Very Basic Api
 import os
-import youtube_dl
 import tomli
 
 class values():
@@ -17,21 +16,16 @@ class values():
         with open("config.toml", mode = "rb") as fp:
             config = tomli.load(fp)
         token = config["options"]["bot_token"]
-        youtube_api_key = config["options"]["yt_api"]
-
+        
         if not token:
             tkn = config["options"]["bot_token_env"]
-            token = os.getenv("tkn")
-        if not youtube_api_key:
-            yt = config["options"]["yt_api_env"]
-            youtube_api_key = os.getenv("yt")
+            token = os.getenv(tkn)
         
         data = {
             "guilds": guilds,
             "color": embedColor,
             "prefix": prefix,
-            "token": token,
-            "yt_api_key": youtube_api_key
+            "token": token
         }
         
         return data.get(value.lower())

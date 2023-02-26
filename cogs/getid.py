@@ -16,7 +16,7 @@ class GetID(commands.Cog):
         IdEmbed = nextcord.Embed(
             title=f"{user.name}'s Id",
             color=embedColor,
-            description=f"The Id Of {user.name}{user.discriminator} is {user.id}")
+            description=f"The Id Of `{user.name}#{user.discriminator}` is {user.id}")
         IdEmbed.set_thumbnail(user.avatar.url)
         IdEmbed.add_field(name="Joined Discord on", value=user.created_at)
         IdEmbed.add_field(name="Avatar download link", value=f"[Click Here]({user.avatar.url})")
