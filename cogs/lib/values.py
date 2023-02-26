@@ -1,6 +1,5 @@
 #Very Basic Api
 import os
-import youtube_dl
 import tomli
 
 class values():
@@ -20,7 +19,7 @@ class values():
         
         if not token:
             tkn = config["options"]["bot_token_env"]
-            token = os.getenv("tkn")
+            token = os.getenv(tkn)
         
         data = {
             "guilds": guilds,
