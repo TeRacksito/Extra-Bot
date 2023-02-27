@@ -51,5 +51,7 @@ for i in os.listdir("cogs"):
 if __name__ == "__main__":
     for extension in innitial_extensions:
         client.load_extension(extension)
-
-client.run(token)  # runs the bot
+try:
+    client.run(token)  # runs the bot
+except:
+    print("There was a problem starting the bot, maybe check the token?\nor Check your internet Connection")
