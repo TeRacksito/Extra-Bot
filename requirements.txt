@@ -1,3 +1,4 @@
 nextcord
 nextcord[voice,speed]
 requests
+rubiks_cube
