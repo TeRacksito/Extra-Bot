@@ -17,9 +17,9 @@ class values():
             config = tomli.load(fp)
         token = config["options"]["bot_token"]
         
-        if not token:
+        if token == "":
             tkn = config["options"]["bot_token_env"]
-            token = os.getenv(tkn)
+            token = os.environ.get(tkn)
         
         data = {
             "guilds": guilds,
