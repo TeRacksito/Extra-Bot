@@ -133,3 +133,7 @@ dmypy.json
 token.txt/
 config.toml
 config.toml
+
+# Others
+.vscode/settings.json
+.vscode/launch.json
