@@ -1,4 +1,3 @@
 [options]
-bot_token = "MTA5NDY3NTI2Njg5MjIwMjA2NA.G1qZWD.8TfwRtUExwATH6S__XyXcLXk-yrpcYoS7XSOXg"
-youtube_token = "AIzaSyCucedFxg8HDImN_lQPPEZxSjgHgMOObzw"
+bot_token = ""
 bot_token_env = "BOTTOKEN"
