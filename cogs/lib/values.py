@@ -12,12 +12,136 @@ Raises
 import json
 import os
 import traceback
-from types import SimpleNamespace as SN
 from typing import Union
 
 import tomli
 
 from cogs.lib.terminal import error
+
+
+def load_json_data(filename: str = "data.json", encoding: str = "utf8") -> Union[dict, any]:
+    """
+    load_json_data function
+
+    Open a `.json` file and load its data.
+
+    Parameters
+    ----------
+    filename : `str, optional`
+        The path to the specific data file, by default `"data.json"`.
+    encoding : `str, optional`
+        The encoding method used to read the file, by default `"utf-8"`.
+
+    Returns
+    -------
+    `dict | any`
+        Returns the data saved in the file.
+    """
+
+    try:
+        with open(file= filename, mode= "r", encoding= encoding, errors= "strict") as file:
+            data = json.load(file)
+        return data
+    except ValueError as exception:
+        error(exception, traceback.format_exc())
+
+def load_toml_data(filename: str = "config.toml") -> Union[dict, any]:
+    """
+    load_toml_data function
+
+    Open a `.toml` file and load its data.
+
+    Parameters
+    ----------
+    filename : `str, optional`
+        The path to the specific data file, by default `"config.toml"`.
+
+    Returns
+    -------
+    dict | any
+        Returns the data saved in the file.
+    """
+
+    try:
+        with open(file= filename, mode= "rb") as file:
+            data = tomli.load(file)
+        return data
+    except ValueError as exception:
+        error(exception, traceback.format_exc())
+
+def find_key(key_objective: str, dictionary: dict) -> Union[dict, None, any]:
+    """
+    find_key function
+
+    Search a specific `key` on a given `dictionary`.
+
+    If the `key` is not found in the first layer of the
+    `dictionary`, then the next layer is acceded until
+    the `key` is found or no more layers are available.
+    If the `key` does not exist in the given `dictionary`
+    then `None` is returned.
+
+    Parameters
+    ----------
+    key_objective : `str`
+        The `key` looked up in the `dictionary`.
+    dictionary : `dict`
+        The `dictionary` where the search will be performed.
+
+    Returns
+    -------
+    `dict | None | any`
+        Returns the data found in the `dictionary` attached to
+        the specific `key`. If the `key` does not exist in the
+        given `dictionary` then `None` is returned.
+    """
+    for key, value in dictionary.items():
+        if key == key_objective:
+            return value
+        elif isinstance(value, dict):
+            result = find_key(key_objective, value)
+            if result is not None:
+                return result
+    return None
+def generate_payload(key: str, data: dict) -> Union[dict, None, any]:
+    """
+    generate_payload function
+
+    Handles `find_key()` function.
+
+    `generate_payload()` function is not meant to use
+    outside the `DataFetcher`.
+
+    Parameters
+    ----------
+    key : `str`
+        The `key` looked up in the `data`.
+    data : 'dict'
+        The `dictionary` where the search will be performed.
+
+    Returns
+    -------
+    `dict | None | any`
+        Returns the data found in the `dictionary` attached to
+        the specific `key` as the final payload. If `find_key()`
+        function returns `None`, then also `None` is returned and
+        an exception is raised.
+
+    Raises
+    ------
+    `KeyError`
+        If `find_key()` function returns `None`, then a `KeyError`
+        exception is raised.
+    """
+
+    payload = find_key(key, data)
+
+    if payload is None:
+        try:
+            raise KeyError(data)
+        except KeyError as exception:
+            error(exception, traceback.format_exc(), )
+    return payload
 
 
 class DataFetcher:
@@ -29,131 +153,7 @@ class DataFetcher:
     def __init__(self):
         pass
 
-    def load_json_data(self, filename: str = "data.json", encoding: str = "utf-8") -> Union[dict, any]:
-        """
-        load_json_data function
 
-        Open a `.json` file and load its data.
-
-        Parameters
-        ----------
-        filename : `str, optional`
-            The path to the specific data file, by default `"data.json"`.
-        encoding : `str, optional`
-            The encoding method used to read the file, by default `"utf-8"`.
-
-        Returns
-        -------
-        `dict | any`
-            Returns the data saved in the file.
-        """
-
-        try:
-            with open(file= filename, mode= "r", encoding= encoding, errors= "strict") as file:
-                data = json.load(file)
-                data = SN(**data)
-            return data
-        except ValueError as exception:
-            error(exception, traceback.format_exc())
-
-    def load_toml_data(self, filename: str = "config.toml") -> Union[dict, any]:
-        """
-        load_toml_data function
-
-        Open a `.toml` file and load its data.
-
-        Parameters
-        ----------
-        filename : `str, optional`
-            The path to the specific data file, by default `"config.toml"`.
-
-        Returns
-        -------
-        dict | any
-            Returns the data saved in the file.
-        """
-
-        try:
-            with open(file= filename, mode= "rb") as file:
-                data = tomli.load(file)
-                data = SN(**data)
-            return data
-        except ValueError as exception:
-            error(exception, traceback.format_exc())
-
-    def find_key(self, key_objective: str, dictionary: dict) -> Union[dict, None, any]:
-        """
-        find_key function
-
-        Search a specific `key` on a given `dictionary`.
-
-        If the `key` is not found in the first layer of the
-        `dictionary`, then the next layer is acceded until
-        the `key` is found or no more layers are available.
-        If the `key` does not exist in the given `dictionary`
-        then `None` is returned.
-
-        Parameters
-        ----------
-        key_objective : `str`
-            The `key` looked up in the `dictionary`.
-        dictionary : `dict`
-            The `dictionary` where the search will be performed.
-
-        Returns
-        -------
-        `dict | None | any`
-            Returns the data found in the `dictionary` attached to
-            the specific `key`. If the `key` does not exist in the
-            given `dictionary` then `None` is returned.
-        """
-        for key, value in dictionary.items():
-            if key == key_objective:
-                return value
-            elif isinstance(value, dict):
-                result = self.find_key(key_objective, value)
-                if result is not None:
-                    return result
-        return None
-    def generate_payload(self, key: str, data: dict) -> Union[dict, None, any]:
-        """
-        generate_payload function
-
-        Handles `find_key()` function.
-
-        `generate_payload()` function is not meant to use
-        outside the `DataFetcher`.
-
-        Parameters
-        ----------
-        key : `str`
-            The `key` looked up in the `data`.
-        data : 'dict'
-            The `dictionary` where the search will be performed.
-
-        Returns
-        -------
-        `dict | None | any`
-            Returns the data found in the `dictionary` attached to
-            the specific `key` as the final payload. If `find_key()`
-            function returns `None`, then also `None` is returned and
-            an exception is raised.
-
-        Raises
-        ------
-        `KeyError`
-            If `find_key()` function returns `None`, then a `KeyError`
-            exception is raised.
-        """
-
-        payload = self.find_key(key, data)
-
-        if payload is None:
-            try:
-                raise KeyError(data)
-            except KeyError as exception:
-                error(exception, traceback.format_exc(), )
-        return payload
 
 
     @classmethod
@@ -197,10 +197,10 @@ class DataFetcher:
             # Default payload configuration.
             try:
                 # data.json loading
-                data = cls.load_json_data(self= cls)
-                guilds_id = [guild["id"] for guild in data.guilds.values()]
-                embeds = data.embeds
-                prefix = data.metadata["prefix"]
+                data = load_json_data()
+                guilds_id = [guild["id"] for guild in data["guilds"].values()]
+                embeds = data["embeds"]
+                prefix = data["metadata"]["prefix"]
             except TypeError:
                 # No data where found...
                 guilds_id = None
@@ -209,10 +209,10 @@ class DataFetcher:
 
             try:
                 # config.toml loading
-                config = cls.load_toml_data(self= cls)
-                token = config.options["bot_token"]
+                config = load_toml_data()
+                token = config["options"]["bot_token"]
                 if token == "":
-                    tkn = config.options.bot_token_env
+                    tkn = config["options"]["bot_token_env"]
                     token = os.environ.get(tkn)
             except Exception as exception: # pylint: disable=broad-exception-caught
                 # No data where found...
@@ -236,13 +236,13 @@ class DataFetcher:
 
             # .json file search support.
             if search.endswith(".json"):
-                data = cls.load_json_data(self= cls, filename= search)
+                data = load_json_data(filename= search)
 
             # .json file search support.
             elif search.endswith(".toml"):
-                data = cls.load_toml_data(self= cls, filename= search)
-            
+                data = load_toml_data(filename= search)
+
             # Could be added new file format's support.
 
-            payload = cls.generate_payload(self= cls, key= key, data= data)
+            payload = generate_payload(key= key, data= data)
             return payload

@@ -1,13 +1,13 @@
 Add a feature where when a specific youtuber posts a video it sends a message in a specific channel
 
-~~remove the mention from the /flipcoin command~~ (nevermind)
-# Done one 16th of octobor
+~~remove the mention from the /flipcoin command~~ (never mind)
+# Done one 16th of October
 ~~Fix the help command ~~
 
-# Done on 14th of october 2022
-~~Learn youtube api and improve the music command~~
+# Done on 14th of October 2022
+~~Learn YouTube api and improve the music command~~
 
-# Below tasks were done on 13th of october 2022
+# Below tasks were done on 13th of October 2022
 ~~Add /subtract command~~
 
 ~~Add /add command~~

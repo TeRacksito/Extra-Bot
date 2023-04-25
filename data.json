@@ -13,6 +13,11 @@
     "embeds": {
         "default": {
             "color": 2642682
+        },
+        "minesweeper": {
+          "color": 2642682,
+          "thumbnail_url" : "https://whatemoji.org/wp-content/uploads/2020/07/Bomb-Emoji-1080x1080.png",
+          "title": "MineSweeper!"
         }
     },
     "metadata": {

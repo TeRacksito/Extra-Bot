@@ -11,6 +11,7 @@ import traceback
 import cogs.lib.terminal as terminal
 from cogs.lib.terminal import error
 from cogs.lib.values import DataFetcher as DF
+# from events import event_handler # revisar esto no está bien
 
 # Check for libraries an automatically install them
 try:
@@ -23,6 +24,9 @@ except ModuleNotFoundError:
         os.system("pip3 install -r requirements.txt")
 
 from nextcord.ext import commands
+
+# Initialize all logging and terminal features.
+terminal.initialize()
 
 prefix= DF.get("prefix")
 token = DF.get("token")
@@ -52,10 +56,11 @@ async def on_ready():
     print("---------------------------------------------------------------")
 
 
+
 # Cogs loading process.
 if __name__ == "__main__":
     for filename in os.listdir("cogs"):
-        if filename.endswith(".py"):
+        if filename.endswith(".py") and filename not in ["youtube_test.py", "youtube.py"]:
             bot.load_extension(f"cogs.{filename[:-3]}")
             print(terminal.SGR.format(f"Loaded Cogs.{terminal.SGR.apply(filename, terminal.SGR.bold)}",
                                       terminal.SGR.Foreground.rgb(128, 128, 128)))

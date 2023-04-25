@@ -22,378 +22,8 @@ import os
 import re
 import sys
 import traceback
-
-
-class CustomStdout:
-    """
-    A Custom `sys.stdout` class
-
-    Basically, a new `stdout` is defined using `io.StringIO()` text buffer.
-    `write()` and `flush()` functions from the buffer are redefined and
-    customized.
-
-    This class affects mostly on python's `print()` function.
-    """
-    def __init__(self) -> None:
-        # The buffer for the sys.stdout.
-        self.buffer = io.StringIO()
-
-    def remove_sgr(self, string: str) -> str:
-        """
-        remove_sgr function
-
-        Attempts to remove all SGR codes from a given string.
-
-        Parameters
-        ----------
-        string : `str`
-            The string where SGR codes will be attempted to be removed.
-            If the string does not have any SGR code, then no changes
-            should be applied and the same string should be returned.
-
-        Returns
-        -------
-        `str`
-            A string that should be without any SGR code.
-        """
-
-        # regex pattern that should be able to remove SGR codes.
-        sgr_pattern = r"\x1b\[[0-9;]*[a-zA-Z]"
-        return re.sub(sgr_pattern, "", string)
-
-    def write(self, __s: str) -> None:
-        """
-        write function
-
-        A redefined io buffer `write()` function.
-
-        When the input has a line separator (`\n`) at the end,
-        `flush()` function will be attempted.
-
-        Parameters
-        ----------
-        __s : `str`
-            The input string given by `sys.stdout`
-        """
-
-        self.buffer.write(__s)
-        if __s.endswith("\n"):
-            self.flush()
-
-    def flush(self) -> None:
-        """
-        flush function
-
-        A redefined io buffer `flush()` function.
-
-        Format and print the io buffer's data to the original
-        stdout stream, (`sys.__stdout__`). Then clean up the buffer.
-
-        Also, logger is used to log all `print()` calls.
-        """
-        output = self.buffer.getvalue()
-        # print(f"Flushing --> {[output]}", file=sys.__stdout__)
-        if output:
-            timestamp = Timestamp() # pylint: disable=redefined-outer-name
-            print(f"{SGR.format(timestamp.terminal, SGR.Foreground.blue)} {output}", file=sys.__stdout__, end= "")
-            # If logger level is set more than info level (20), then this log is not saved.
-            logger.info("%s", self.remove_sgr(output[:-1]), extra={"end": ""})
-
-        # Clean up the buffer using io built-in methods.
-        self.buffer.truncate(0)
-        self.buffer.seek(0)
-
-class CustomStderr:
-    """
-    A Custom `sys.stderr` class
-
-    Basically, a new `stderr` is defined using `io.StringIO()` text buffer.
-    `write()` and `flush()` functions from the buffer are redefined and
-    customized.
-
-    This class affects on all exceptions. Every exception raised will go
-    trough this class.
-    """
-    def __init__(self) -> None:
-        # The buffer for the sys.stderr.
-        self.buffer = io.StringIO()
-
-    def remove_sgr(self, text: str) -> str:
-        """
-        remove_sgr function
-
-        Attempts to remove all SGR codes from a given string.
-
-        Parameters
-        ----------
-        text : `str`
-            The string where SGR codes will be attempted to be removed.
-            If the string does not have any SGR code, then no changes
-            should be applied and the same string should be returned.
-
-        Returns
-        -------
-        `str`
-            A string that should be without any SGR code.
-        """
-
-        # regex pattern that should be able to remove SGR codes.
-        sgr_pattern = r"\x1b\[[0-9;]*[a-zA-Z]"  # patrón de regex para buscar estilo SGR
-        return re.sub(sgr_pattern, "", text)
-
-    def write(self, __s: str) -> None:
-        """
-        write function
-
-        A redefined io buffer `write()` function.
-
-        When the input has a line separator (`\n`) at the end,
-        `flush()` function will be attempted.
-
-        Parameters
-        ----------
-        __s : `str`
-            The input string given by `sys.stderr`
-        """
-
-        self.buffer.write(__s)
-        if __s.endswith("\n"):
-            self.flush()
-
-    def flush(self) -> None:
-        """
-        flush function
-
-        A redefined io buffer `flush()` function.
-
-        Format and print the io buffer's data to the original
-        stderr stream, (`sys.__stderr__`). Then clean up the buffer.
-
-        Also, logger is used to log all exception raisings.
-        """
-        output = self.buffer.getvalue()
-        # print(f"Flushing --> {[output]}", file=sys.__stdout__)
-        if output:
-            timestamp = Timestamp() # pylint: disable=redefined-outer-name
-            timestamp_preformat = f"{SGR.format(timestamp.terminal, SGR.Foreground.blue)} "
-            # If its not the first line of a traceback...
-            if not "Traceback" in output:
-                # Adding a timestamp only to the first traceback's line.
-                # Adding indention to the rest of the lines.
-                timestamp_preformat = (" " * (1 + len(timestamp.terminal)))
-
-            print(f"{timestamp_preformat}{SGR.format(output, SGR.Background.rgb(70, 30, 50))}", file=sys.__stdout__, end= "")
-            logger.error("%s", self.remove_sgr(output[:-1]), extra={"end": ""})
-
-        self.buffer.truncate(0)
-        self.buffer.seek(0)
-
-# pylint: disable=redefined-outer-name
-def error(
-    exception: Exception,
-    traceback_format_exc: str,
-    message: str | None = None,
-    advice: str | None = None,
-    level: str | int = "ERROR"
-    ) -> None:
-    """
-    error function
-
-    An error handler, useful to print errors with custom messages and advices.
-
-    Parameters
-    ----------
-    exception : `Exception`
-        Should be the exception itself.
-
-        For example, `except ValueError as exception`: where `exception` should
-        be this parameter.
-    
-    traceback_format_exc : `str`
-        The traceback. Always should be a string.
-
-        Is recommended to use `traceback.format_exc()` but it is not the only way.
-        See traceback module's documentation for more information.
-    
-    message : `str | None, optional`
-        A message that will be printed as a header of the error, by default None.
-    
-    advice : `str | None, optional`
-        An advice that will be printed at the very end of the error, by default None.
-    
-    level : `str | int, optional`
-        The logging level for this particular error, by default "ERROR".
-
-        Can not be DEBUG level or any lower, otherwise `ValueError` exception is raised.
-
-    Raises
-    ------
-    `ValueError`
-        If the logging level is at DEBUG or any lower.
-    `ValueError`
-        If the logging level is set by using an undefined name.
-    """
-    timestamp = Timestamp() #pylint: disable=redefined-outer-name
-    concatenator = str()
-
-    # Creating a decorated concatenation between message and exception.
-    # Only if there is a message.
-    if message is None:
-        message = ""
-    else:
-        concatenator = " --> "
-
-    # Adding adive to the end of the traceback. Only if there is a advice.
-    if advice is None:
-        advice = ""
-        traceback_output = traceback_format_exc
-    else:
-        traceback_output = " \n".join([traceback_format_exc, SGR.format(advice, SGR.Foreground.yellow)])
-
-    # Translating logging level from string to integer.
-    try:
-        level = level.upper()
-        match level:
-            case "CRITICAL":
-                level = 50
-            case "ERROR":
-                level = 40
-            case "WARNING":
-                level = 30
-            case "INFO":
-                level = 20
-            case "DEBUG":
-                try:
-                    raise ValueError(level)
-                except ValueError as sub_exception:
-                    error(exception, traceback.format_exc(), message, advice)
-                    return error(sub_exception, traceback.format_stack()[0],
-                            "error() handler can not have DEBUG logging level or any lower",
-                            "Use the logging debug() function on your current logger instead.",
-                            level= "warning")
-            case _:
-                try:
-                    raise ValueError(level)
-                except ValueError as sub_exception:
-                    error(sub_exception, traceback.format_exc(),
-                            f"logging level {level} is unknown.",
-                            f"If {level} is a custom logging level, try to set it as a integer.",
-                            level= "warning")
-                    return error(exception, traceback_format_exc, message, advice)
-    except AttributeError:
-        if level <= 10:
-            try:
-                raise ValueError(level) # pylint: disable=raise-missing-from
-            except ValueError as sub_exception:
-                error(sub_exception, traceback.format_exc(),
-                        "error() handler can not have DEBUG logging level or any lower",
-                        "Use the logging debug() function on your current logger instead.",
-                        level= "warning")
-                return error(exception, traceback_format_exc, message, advice)
-
-    # Print the error and log it.
-    print(f"{SGR.format(timestamp.terminal, SGR.Foreground.blue)} "+
-          f"{SGR.EXT}{SGR.Foreground.red}{SGR.F}{message}{concatenator}"+
-          f"{SGR.EXT}{SGR.BrightForeground.red}{SGR.F}{exception}{SGR.default_format}",
-          file= sys.__stdout__)
-    logger.log(level, "%s%s%s", message, concatenator, exception)
-
-    print(f"{SGR.format(timestamp.terminal, SGR.Foreground.blue)} "+
-          f"{SGR.format(traceback_output, SGR.Background.rgb(70, 30, 50))}",
-          file= sys.__stdout__)
-    logger.log(level, "%s\n%s", traceback_format_exc, advice)
-
-class Timestamp:
-    """
-    Timestamp Class
-
-    A class to easily create timestamps.
-    """
-    def __init__(self, timestamp: datetime.datetime = datetime.datetime.now()):
-        self.timestamp = timestamp
-
-    @property
-    def now(self) -> datetime.datetime:
-        """
-        now function
-
-        Updates the timestamp of the class.
-
-        Returns
-        -------
-        `Timestamp`
-            Updated version of the class.
-        """
-        timestamp = datetime.datetime.now()
-        return self.__class__(timestamp)
-
-    @property
-    def terminal(self) -> str:
-        """
-        terminal function
-
-        Returns the timestamp formatted for terminal purposes.
-
-        Returns
-        -------
-        `str`
-            A string as a timestamp. Hours, minutes and seconds are given.
-        """
-        return self.timestamp.strftime(r"[%H:%M:%S]")
-
-    @property
-    def log(self) -> str:
-        """
-        log function
-
-        Returns the timestamp formatted for logging purposes.
-
-        Returns
-        -------
-        `str`
-            A string as a timestamp. Day and month, also hours, minutes and seconds are given.
-        """
-        return self.timestamp.strftime(r"[%d/%m %H:%M:%S]")
-
-    @property
-    def file(self) -> str:
-        """
-        file function
-
-        Returns the timestamp formatted for file names purposes.
-
-        Returns
-        -------
-        `str`
-            A string as a timestamp usable for file names. Day and month,
-            also hours, minutes and seconds are given.
-        """
-        return self.timestamp.strftime(r"%d_%m__%H_%M_%S")
-
-    def __enter__(self):
-        """
-        __enter__ function
-
-        The sole purpose of this function is to enable the ability of this
-        class to be used in the `with-as` statement.
-
-        Returns
-        -------
-        `Timestamp`
-            Returns itself.
-        """
-        return self
-
-    def __exit__(self, exc_type, exc_val, exc_tb) -> None:
-        """
-        __exit__ function
-
-        The sole purpose of this function is to enable the ability of this
-        class to be used in the `with-as` statement.
-
-        Deletes itself when exiting `with-as` statement.
-        """
-        del self
+import codecs
+from encodings.cp1252 import encoding_table
 
 class SGR:
     """
@@ -1087,65 +717,447 @@ class SGR:
         composition = f"{cls.EXT}{values_str}{cls.F}{content}{cls.EXT}{remove_values_str}{cls.F}"
         return composition
 
-logging.config.fileConfig("cogs/lib/logging.conf")
-logger = logging.getLogger("root")
+def remove_sgr(string: str) -> str:
+    """
+    remove_sgr function
 
-# Creates logs directory if it does not exist.
-os.makedirs("logs", exist_ok=True)
+    Attempts to remove all SGR codes from a given string.
 
-# Attempts to create a unique logging file.
-with Timestamp() as timestamp:
-    path = f"logs/{timestamp.file}.log"
-    if os.path.exists(path):
-        path = f"logs/{timestamp.file}_duplicate.log"
+    Parameters
+    ----------
+    string : `str`
+        The string where SGR codes will be attempted to be removed.
+        If the string does not have any SGR code, then no changes
+        should be applied and the same string should be returned.
 
-    NUMBER = 2
-    while os.path.exists(path) and NUMBER < 1000:
-        path = f"logs/{timestamp.file}_duplicate_{NUMBER}.log"
-        NUMBER += 1
+    Returns
+    -------
+    `str`
+        A string that should be without any SGR code.
+    """
 
-    if os.path.exists(path):
+    # regex pattern that should be able to remove SGR codes.
+    sgr_pattern = r"\x1b\[[0-9;]*[a-zA-Z]"
+    return re.sub(sgr_pattern, "", string)
+
+class Timestamp:
+    """
+    Timestamp Class
+
+    A class to easily create timestamps.
+    """
+    def __init__(self, timestamp: datetime.datetime = datetime.datetime.now()):
+        self.timestamp = timestamp
+
+    @property
+    def now(self) -> datetime.datetime:
+        """
+        now function
+
+        Updates the timestamp of the class.
+
+        Returns
+        -------
+        `Timestamp`
+            Updated version of the class.
+        """
+        timestamp = datetime.datetime.now()
+        return self.__class__(timestamp)
+
+    @property
+    def terminal(self) -> str:
+        """
+        terminal function
+
+        Returns the timestamp formatted for terminal purposes.
+
+        Returns
+        -------
+        `str`
+            A string as a timestamp. Hours, minutes and seconds are given.
+        """
+        return self.timestamp.strftime(r"[%H:%M:%S]")
+
+    @property
+    def log(self) -> str:
+        """
+        log function
+
+        Returns the timestamp formatted for logging purposes.
+
+        Returns
+        -------
+        `str`
+            A string as a timestamp. Day and month, also hours, minutes and seconds are given.
+        """
+        return self.timestamp.strftime(r"[%d/%m %H:%M:%S]")
+
+    @property
+    def file(self) -> str:
+        """
+        file function
+
+        Returns the timestamp formatted for file names purposes.
+
+        Returns
+        -------
+        `str`
+            A string as a timestamp usable for file names. Day and month,
+            also hours, minutes and seconds are given.
+        """
+        return self.timestamp.strftime(r"%d_%m__%H_%M_%S")
+
+    def __enter__(self):
+        """
+        __enter__ function
+
+        The sole purpose of this function is to enable the ability of this
+        class to be used in the `with-as` statement.
+
+        Returns
+        -------
+        `Timestamp`
+            Returns itself.
+        """
+        return self
+
+    def __exit__(self, exc_type, exc_val, exc_tb) -> None:
+        """
+        __exit__ function
+
+        The sole purpose of this function is to enable the ability of this
+        class to be used in the `with-as` statement.
+
+        Deletes itself when exiting `with-as` statement.
+        """
+        del self
+
+class CustomStdout:
+    """
+    A Custom `sys.stdout` class
+
+    Basically, a new `stdout` is defined using `io.StringIO()` text buffer.
+    `write()` and `flush()` functions from the buffer are redefined and
+    customized.
+
+    This class affects mostly on python's `print()` function.
+    """
+    def __init__(self) -> None:
+        # The buffer for the sys.stdout.
+        self.buffer = io.StringIO()
+
+    def write(self, __s: str) -> None:
+        """
+        write function
+
+        A redefined io buffer `write()` function.
+
+        When the input has a line separator (`\n`) at the end,
+        `flush()` function will be attempted.
+
+        Parameters
+        ----------
+        __s : `str`
+            The input string given by `sys.stdout`
+        """
         try:
-            raise IOError(path)
-        except IOError as exception:
-            error(exception, traceback.format_exc(), "Unable to create a logging file!?")
+            self.buffer.write(__s)
+        except TypeError:
+            payload = None
+            for encoding in ['utf-8', 'latin-1', 'ascii', 'cp1252']:
+                try:
+                    payload = __s.decode(encoding)
+                    __s = payload
+                    break
+                except UnicodeDecodeError:
+                    pass
+            if payload is None:
+                del __s
+                __s = "__Error_while_trying_to_decode_this_bytes_object__\n"
+        if __s.endswith("\n"):
+            self.flush()
 
-# Defines the File Handler for the logger.
-handler = logging.FileHandler(path, "a")
-handler.formatter = logger.handlers[0].formatter
-handler.level = logger.handlers[0].level
+    def flush(self) -> None:
+        """
+        flush function
 
-# Adds the File Handler to the logger.
-logger.removeHandler(logger.handlers[0])
-logger.addHandler(handler)
+        A redefined io buffer `flush()` function.
 
-# Changes the stream to the custom ones.
-sys.stdout = CustomStdout()
-sys.stderr = CustomStderr()
+        Format and print the io buffer's data to the original
+        stdout stream, (`sys.__stdout__`). Then clean up the buffer.
 
-match handler.level:
-    case 50:
-        handler_level= f"CRITICAL ({handler.level})"
-    case 40:
-        handler_level= f"ERROR ({handler.level})"
-    case 30:
-        handler_level= f"WARNING ({handler.level})"
-    case 20:
-        handler_level= f"INFO ({handler.level})"
-    case 10:
-        handler_level= f"DEBUG ({handler.level})"
-    case 0:
-        handler_level= f"NOTSET ({handler.level})"
-    case _:
-        handler_level= handler.level
+        Also, logger is used to log all `print()` calls.
+        """
+        output = self.buffer.getvalue()
+        # print(f"Flushing --> {[output]}", file=sys.__stdout__)
+        if output:
+            timestamp = Timestamp()
+            print(f"{SGR.format(timestamp.terminal, SGR.Foreground.blue)} {output}", file=sys.__stdout__, end= "")
+            # If logger level is set more than info level (20), then this log is not saved.
+            try:
+                codecs.charmap_encode(output, None, encoding_table) # Just for error prevention.
+                logger.info("%s", remove_sgr(output[:-1]), extra={"end": ""})
+            except Exception as exception: # pylint: disable=broad-exception-caught
+                logger.info("%s", "Here should be a log, failed to log.", extra={"end": ""})
+                error(exception, traceback.format_exc(), "Logger could not log.")
 
 
-print(f"{SGR.set(SGR.Background.rgb(30, 60, 100), SGR.Foreground.magenta)}Loaded "+
-      f"{SGR.set(SGR.Foreground.yellow)}{SGR.apply('Terminal Handler Module', SGR.bold)} "+
-      f"{SGR.set(SGR.Foreground.magenta)}successfully, created by "+
-      f"{SGR.set(SGR.Foreground.yellow)}{SGR.apply('TeRackSito', SGR.bold)}"+
-      f"{SGR.set(SGR.Foreground.magenta)}!{SGR.default_format}")
+        # Clean up the buffer using io built-in methods.
+        self.buffer.truncate(0)
+        self.buffer.seek(0)
 
-print(SGR.format(f"Logging at {SGR.apply(path, SGR.bold, SGR.underline)} "+
-                 f"with {SGR.apply(handler_level, SGR.bold)} level!",
-                 SGR.Foreground.rgb(128, 128, 128)))
+class CustomStderr:
+    """
+    A Custom `sys.stderr` class
+
+    Basically, a new `stderr` is defined using `io.StringIO()` text buffer.
+    `write()` and `flush()` functions from the buffer are redefined and
+    customized.
+
+    This class affects on all exceptions. Every exception raised will go
+    trough this class.
+    """
+    def __init__(self) -> None:
+        # The buffer for the sys.stderr.
+        self.buffer = io.StringIO()
+
+    def write(self, __s: str) -> None:
+        """
+        write function
+
+        A redefined io buffer `write()` function.
+
+        When the input has a line separator (`\n`) at the end,
+        `flush()` function will be attempted.
+
+        Parameters
+        ----------
+        __s : `str`
+            The input string given by `sys.stderr`
+        """
+
+        self.buffer.write(__s)
+        if __s.endswith("\n"):
+            self.flush()
+
+    def flush(self) -> None:
+        """
+        flush function
+
+        A redefined io buffer `flush()` function.
+
+        Format and print the io buffer's data to the original
+        stderr stream, (`sys.__stderr__`). Then clean up the buffer.
+
+        Also, logger is used to log all exception raisings.
+        """
+        output = self.buffer.getvalue()
+        # print(f"Flushing --> {[output]}", file=sys.__stdout__)
+        if output:
+            timestamp = Timestamp()
+            timestamp_preformat = f"{SGR.format(timestamp.terminal, SGR.Foreground.blue)} "
+            # If its not the first line of a traceback...
+            if not "Traceback" in output:
+                # Adding a timestamp only to the first traceback's line.
+                # Adding indention to the rest of the lines.
+                timestamp_preformat = (" " * (1 + len(timestamp.terminal)))
+
+            print(f"{timestamp_preformat}{SGR.format(output, SGR.Background.rgb(70, 30, 50))}", file=sys.__stdout__, end= "")
+            try:
+                codecs.charmap_encode(output, None, encoding_table) # Just for error prevention.
+                logger.error("%s", remove_sgr(output[:-1]), extra={"end": ""})
+            except Exception as exception: # pylint: disable=broad-exception-caught
+                logger.info("%s", "Here should be a log, failed to log.", extra={"end": ""})
+                error(exception, traceback.format_exc(), "Logger could not log.")
+
+        self.buffer.truncate(0)
+        self.buffer.seek(0)
+
+def error(
+    exception: Exception,
+    traceback_format_exc: str,
+    message: str | None = None,
+    advice: str | None = None,
+    level: str | int = "ERROR"
+    ) -> None:
+    """
+    error function
+
+    An error handler, useful to print errors with custom messages and advices.
+
+    Parameters
+    ----------
+    exception : `Exception`
+        Should be the exception itself.
+
+        For example, `except ValueError as exception`: where `exception` should
+        be this parameter.
+    
+    traceback_format_exc : `str`
+        The traceback. Always should be a string.
+
+        Is recommended to use `traceback.format_exc()` but it is not the only way.
+        See traceback module's documentation for more information.
+    
+    message : `str | None, optional`
+        A message that will be printed as a header of the error, by default None.
+    
+    advice : `str | None, optional`
+        An advice that will be printed at the very end of the error, by default None.
+    
+    level : `str | int, optional`
+        The logging level for this particular error, by default "ERROR".
+
+        Can not be DEBUG level or any lower, otherwise `ValueError` exception is raised.
+
+    Raises
+    ------
+    `ValueError`
+        If the logging level is at DEBUG or any lower.
+    `ValueError`
+        If the logging level is set by using an undefined name.
+    """
+    timestamp = Timestamp()
+    concatenator = str()
+
+    # Creating a decorated concatenation between message and exception.
+    # Only if there is a message.
+    if message is None:
+        message = ""
+    else:
+        concatenator = " --> "
+
+    # Adding adive to the end of the traceback. Only if there is a advice.
+    if advice is None:
+        advice = ""
+        traceback_output = traceback_format_exc
+    else:
+        traceback_output = " \n".join([traceback_format_exc, SGR.format(advice, SGR.Foreground.yellow)])
+
+    # Translating logging level from string to integer.
+    try:
+        level = level.upper()
+        match level:
+            case "CRITICAL":
+                level = 50
+            case "ERROR":
+                level = 40
+            case "WARNING":
+                level = 30
+            case "INFO":
+                level = 20
+            case "DEBUG":
+                try:
+                    raise ValueError(level)
+                except ValueError as sub_exception:
+                    error(exception, traceback.format_exc(), message, advice)
+                    return error(sub_exception, traceback.format_stack()[0],
+                            "error() handler can not have DEBUG logging level or any lower",
+                            "Use the logging debug() function on your current logger instead.",
+                            level= "warning")
+            case _:
+                try:
+                    raise ValueError(level)
+                except ValueError as sub_exception:
+                    error(sub_exception, traceback.format_exc(),
+                            f"logging level {level} is unknown.",
+                            f"If {level} is a custom logging level, try to set it as a integer.",
+                            level= "warning")
+                    return error(exception, traceback_format_exc, message, advice)
+    except AttributeError:
+        if level <= 10:
+            try:
+                raise ValueError(level) # pylint: disable=raise-missing-from
+            except ValueError as sub_exception:
+                error(sub_exception, traceback.format_exc(),
+                        "error() handler can not have DEBUG logging level or any lower",
+                        "Use the logging debug() function on your current logger instead.",
+                        level= "warning")
+                return error(exception, traceback_format_exc, message, advice)
+
+    # Print the error and log it.
+    print(f"{SGR.format(timestamp.terminal, SGR.Foreground.blue)} "+
+          f"{SGR.EXT}{SGR.Foreground.red}{SGR.F}{message}{concatenator}"+
+          f"{SGR.EXT}{SGR.BrightForeground.red}{SGR.F}{exception}{SGR.default_format}",
+          file= sys.__stdout__)
+    try:
+        codecs.charmap_encode(message, None, encoding_table) # Just for error prevention.
+        logger.log(level, "%s%s%s", message, concatenator, exception)
+    except Exception as exception: # pylint: disable=unused-argument, broad-exception-caught
+        logger.info("%s", "Here should be a log, failed to log.", extra={"end": ""})
+        error(exception, traceback.format_exc(), "Logger could not log.")
+
+    print(f"{SGR.format(timestamp.terminal, SGR.Foreground.blue)} "+
+          f"{SGR.format(traceback_output, SGR.Background.rgb(70, 30, 50))}",
+          file= sys.__stdout__)
+    try:
+        codecs.charmap_encode(traceback_format_exc, None, encoding_table) # Just for error prevention.
+        logger.log(level, "%s\n%s", traceback_format_exc, advice)
+    except Exception as exception: # pylint: disable=broad-exception-caught
+        logger.info("%s", "Here should be a log, failed to log.", extra={"end": ""})
+        error(exception, traceback.format_exc(), "Logger could not log.")
+
+def initialize():
+    global logger # pylint: disable=global-variable-undefined, invalid-name
+    logging.config.fileConfig("cogs/lib/logging.conf")
+    logger = logging.getLogger("root")
+
+    # Creates logs directory if it does not exist.
+    os.makedirs("logs", exist_ok=True)
+
+    # Attempts to create a unique logging file.
+    with Timestamp() as timestamp:
+        path = f"logs/{timestamp.file}.log"
+        if os.path.exists(path):
+            path = f"logs/{timestamp.file}_duplicate.log"
+
+        number = 2
+        while os.path.exists(path) and number < 1000:
+            path = f"logs/{timestamp.file}_duplicate_{number}.log"
+            number += 1
+
+        if os.path.exists(path):
+            try:
+                raise IOError(path)
+            except IOError as exception:
+                error(exception, traceback.format_exc(), "Unable to create a logging file!?")
+
+    # Defines the File Handler for the logger.
+    handler = logging.FileHandler(path, "a")
+    handler.formatter = logger.handlers[0].formatter
+    handler.level = logger.handlers[0].level
+
+    # Adds the File Handler to the logger.
+    logger.removeHandler(logger.handlers[0])
+    logger.addHandler(handler)
+
+    # Changes the stream to the custom ones.
+    sys.stdout = CustomStdout()
+    sys.stderr = CustomStderr()
+
+    match handler.level:
+        case 50:
+            handler_level= f"CRITICAL ({handler.level})"
+        case 40:
+            handler_level= f"ERROR ({handler.level})"
+        case 30:
+            handler_level= f"WARNING ({handler.level})"
+        case 20:
+            handler_level= f"INFO ({handler.level})"
+        case 10:
+            handler_level= f"DEBUG ({handler.level})"
+        case 0:
+            handler_level= f"NOTSET ({handler.level})"
+        case _:
+            handler_level= handler.level
+
+
+    print(f"{SGR.set(SGR.Background.rgb(30, 60, 100), SGR.Foreground.magenta)}Loaded "+
+        f"{SGR.set(SGR.Foreground.yellow)}{SGR.apply('Terminal Handler Module', SGR.bold)} "+
+        f"{SGR.set(SGR.Foreground.magenta)}successfully, created by "+
+        f"{SGR.set(SGR.Foreground.yellow)}{SGR.apply('TeRackSito', SGR.bold)}"+
+        f"{SGR.set(SGR.Foreground.magenta)}!{SGR.default_format}")
+
+    print(SGR.format(f"Logging at {SGR.apply(path, SGR.bold, SGR.underline)} "+
+                    f"with {SGR.apply(handler_level, SGR.bold)} level!",
+                    SGR.Foreground.rgb(128, 128, 128)))
